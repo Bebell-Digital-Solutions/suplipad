@@ -88,7 +88,6 @@
     const { useState, useEffect, createContext, useContext, useRef } = React;
 
     // --- START OF CONTEXTS ---
-    // ThemeContext.ts
     const ThemeContext = createContext(undefined);
 
     const useTheme = () => {
@@ -100,8 +99,7 @@
     };
     // --- END OF CONTEXTS ---
 
-    // --- START OF ICONS ---
-    // components/icons/SupliPadLogoIcon.tsx - Updated to use image
+    // --- START OF ICONS (LUCIDE) ---
     const SupliPadLogoIcon = (props) => (
       React.createElement('img', {
         src: "https://bucket.mlcdn.com/a/3336/3336910/images/26b9b45bca6fe775c5cfc3886da5f55f36ea642a.png",
@@ -110,84 +108,95 @@
       })
     );
 
-    // components/icons/SunIcon.tsx
     const SunIcon = (props) => (
-      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", ...props },
-        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-6.364-.386l1.591-1.591M3 12h2.25m.386-6.364l1.591 1.591M12 12a2.25 2.25 0 00-2.25 2.25A2.25 2.25 0 0012 12zm0 0a2.25 2.25 0 012.25 2.25A2.25 2.25 0 0112 12z" }),
-        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 12a5.25 5.25 0 100-10.5 5.25 5.25 0 000 10.5z" })
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('circle', { cx: "12", cy: "12", r: "4" }),
+        React.createElement('path', { d: "M12 2v2" }),
+        React.createElement('path', { d: "M12 20v2" }),
+        React.createElement('path', { d: "m4.93 4.93 1.41 1.41" }),
+        React.createElement('path', { d: "m17.66 17.66 1.41 1.41" }),
+        React.createElement('path', { d: "M2 12h2" }),
+        React.createElement('path', { d: "M20 12h2" }),
+        React.createElement('path', { d: "m6.34 17.66-1.41 1.41" }),
+        React.createElement('path', { d: "m19.07 4.93-1.41 1.41" })
       )
     );
 
-    // components/icons/MoonIcon.tsx
     const MoonIcon = (props) => (
-      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", ...props },
-        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", d: "M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" })
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" })
       )
     );
 
-    // components/icons/ChevronDownIcon.tsx
     const ChevronDownIcon = (props) => (
-      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", ...props },
-        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", d: "M19.5 8.25l-7.5 7.5-7.5-7.5" })
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "m6 9 6 6 6-6" })
       )
     );
 
-    // components/icons/CheckCircleIcon.tsx
-    const CheckCircleIcon = (props) => (
-      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", ...props },
-        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", d: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" })
+    const CheckCircleIcon = (props) => ( // Using Lucide CheckCircle2
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" }),
+        React.createElement('path', { d: "m9 12 2 2 4-4" })
       )
     );
     
-    // components/icons/GiftIcon.tsx
     const GiftIcon = (props) => (
-      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", ...props },
-        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", d: "M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 00-8.862 12.872M12.75 3.031a9 9 0 016.69 14.036m0 0l-.177.177a2.25 2.25 0 00-.998 1.787c0 .414.19.786.502 1.007l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L12.5 21l-.423-1.059a.956.956 0 011.652-.928l.679.906a1.125 1.125 0 001.906-.172L19.5 15.75l.612-.153M21 12a9 9 0 11-18 0 9 9 0 0118 0z" })
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('rect', { x: "3", y: "8", width: "18", height: "4", rx: "1" }),
+        React.createElement('path', { d: "M12 8v13" }),
+        React.createElement('path', { d: "M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" }),
+        React.createElement('path', { d: "M7.5 8a2.5 2.5 0 0 1 0-5A4.88 4.88 0 0 1 12 5.5a4.88 4.88 0 0 1 4.5-2.5 2.5 2.5 0 0 1 0 5" })
       )
     );
 
-    // components/icons/WrenchScrewdriverIcon.tsx
-    const WrenchScrewdriverIcon = (props) => (
-      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", ...props },
-        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", d: "M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.472-2.472a3.375 3.375 0 00-4.773-4.773L4.743 12.474M11.42 15.17L5.877 20.724a2.652 2.652 0 003.75 3.75L15.17 18.58m-3.75-3.407L12 12.75M7.432 9.088a3.375 3.375 0 014.774 0l2.088 2.088M10.5 6.498a2.502 2.502 0 11-5.003 0 2.502 2.502 0 015.003 0z" })
+    const WrenchScrewdriverIcon = (props) => ( // Using Lucide Wrench
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" })
       )
     );
 
-    // components/icons/RocketLaunchIcon.tsx
-    const RocketLaunchIcon = (props) => (
-      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", ...props },
-        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", d: "M15.59 14.37a6 6 0 01-5.84 7.38v-4.82m5.84-2.56a12.022 12.022 0 00-5.84 0M15.59 14.37A12.022 12.022 0 0118 12.016M12 2.25A12.022 12.022 0 008.41 14.37m7.18-12.12a12.022 12.022 0 00-5.84 2.56M12 2.25V4.83m0 9.54v2.25m0-11.79c-3.14 0-6 2.69-6 6 0 2.38 1.48 4.4 3.59 5.37M12 2.25c3.14 0 6 2.69 6 6 0 2.38-1.48 4.4-3.59 5.37m0 0c.04.08.08.16.12.24m0 0L9.5 16.5m2.5-2.25L7.5 12m4.5 2.25V4.83" })
+    const RocketLaunchIcon = (props) => ( // Using Lucide Rocket
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" }),
+        React.createElement('path', { d: "m12 15-3-3a22 22 0 0 1 2-3.95A12.87 12.87 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" }),
+        React.createElement('path', { d: "M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" }),
+        React.createElement('path', { d: "M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" })
       )
     );
 
-    // components/icons/PuzzlePieceIcon.tsx
-    const PuzzlePieceIcon = (props) => (
-      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", ...props },
-        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", d: "M14.25 7.756a4.5 4.5 0 100 8.488V7.756zM12 2.253A8.25 8.25 0 003.75 10.5V12c0 4.556 3.694 8.25 8.25 8.25s8.25-3.694 8.25-8.25V10.5A8.25 8.25 0 0012 2.253zM8.25 9.752a3.75 3.75 0 000 7.5V9.752z" })
+    const PuzzlePieceIcon = (props) => ( // Using Lucide Puzzle
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "M19.439 7.85c-.049.322-.098.644-.146.966-.049.322-.098.644-.146.966H14v5.716c1.09.098 1.983.586 2.571 1.275.588.688.883 1.473.883 2.356 0 .883-.295 1.668-.883 2.356-.588.688-1.473 1.08-2.454 1.177V22h-4v-1.281c-1.09-.098-1.983-.586-2.571-1.275-.588-.688-.883-1.473-.883-2.356 0-.883.295 1.668.883 2.356.588-.688 1.473 1.08 2.454 1.177V14H5.146c.049-.322.098-.644.146-.966.049-.322.098-.644.146-.966H10V2H5.719c-.098 1.09-.586 1.983-1.275 2.571C3.756 5.159 2.97 5.454 2.088 5.454c-.883 0-1.668-.295-2.356-.883C-1.09 3.983-.586 3.09.281 2H0v4h1.281c.098-1.09.586-1.983 1.275-2.571.688-.588 1.473-.883 2.356-.883.883 0 1.668.295 2.356.883.588.588.883 1.473.883 2.454V10h4.281c.098-1.09.586-1.983 1.275-2.571C14.841 6.74 15.626 6.445 16.509 6.445c.883 0 1.668.295 2.356.883.588.588.883 1.473.883 2.454V10Z" })
       )
     );
-     // components/icons/ChartBarIcon.tsx
-    const ChartBarIcon = (props) => (
-      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", ...props },
-        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", d: "M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" })
+
+    const ChartBarIcon = (props) => ( // Using Lucide BarChart3
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "M3 3v18h18" }),
+        React.createElement('path', { d: "M18 17V9" }),
+        React.createElement('path', { d: "M13 17V5" }),
+        React.createElement('path', { d: "M8 17v-3" })
       )
     );
-    // components/icons/CurrencyDollarIcon.tsx
-    const CurrencyDollarIcon = (props) => (
-      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", ...props },
-        React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 11.219 12.768 11 12 11c-.768 0-1.536.219-2.121.659L9 12.232z" })
+
+    const CurrencyDollarIcon = (props) => ( // Using Lucide DollarSign
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('line', { x1: "12", x2: "12", y1: "2", y2: "22" }),
+        React.createElement('path', { d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" })
       )
     );
-    // components/icons/BeakerIcon.tsx (for Sensitivity Analysis or Market Data)
+
     const BeakerIcon = (props) => (
-        React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", ...props },
-            React.createElement('path', { strokeLinecap: "round", strokeLinejoin: "round", d: "M14.25 2.25c-.084.22-.168.443-.252.667l-2.736 6.383c-.134.313-.207.653-.207 1V21M14.25 2.25A2.25 2.25 0 0012 0H6.75A2.25 2.25 0 004.5 2.25H2.25a.75.75 0 000 1.5h1.125C4.364 5.37 5.25 7.155 5.25 9v12A2.25 2.25 0 007.5 23.25h9A2.25 2.25 0 0018.75 21V9c0-1.657.294-3.136.83-4.5H21.75a.75.75 0 000-1.5h-2.25a2.25 2.25 0 00-2.25-2.25H14.25zM9 12.75h3" })
+        React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+            React.createElement('path', { d: "M4.5 3h15" }),
+            React.createElement('path', { d: "M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3" }),
+            React.createElement('path', { d: "M6 14h12" })
         )
     );
     // --- END OF ICONS ---
 
     // --- START OF COMPONENTS ---
-    // components/ThemeToggle.tsx
     const ThemeToggle = () => {
       const { theme, toggleTheme } = useTheme();
 
@@ -202,17 +211,16 @@
       );
     };
 
-    // components/Sidebar.tsx
     const Sidebar = ({ navLinks, onNavigate }) => {
       return React.createElement('div', { className: "w-[250px] bg-primary h-screen fixed top-0 left-0 flex flex-col items-center p-4 text-white shadow-lg z-10 font-sans" },
-        React.createElement('div', { className: "my-4" }, // Adjusted margin for image logo
-          React.createElement(SupliPadLogoIcon, { className: "w-40 h-auto" }) // Adjusted size for image
+        React.createElement('div', { className: "my-4" },
+          React.createElement(SupliPadLogoIcon, { className: "w-50 h-auto" }) 
         ),
         React.createElement('a', {
-            href: "mailto:investor@suplipad.shop?subject=Investor Inquiry for Suplipad.shop",
+            href: "mailto:info@bebelldigitalsolutions.com?subject=Investor Inquiry for Suplipad.shop",
             className: "bg-secondary hover:bg-opacity-80 transition-colors w-full text-center border-none text-white py-2.5 px-4 rounded-md cursor-pointer my-4 text-sm font-semibold"
           },
-          "Contact Investor"
+          "Contact Us"
         ),
         React.createElement('nav', { className: "flex-grow w-full overflow-y-auto" },
           navLinks.map((link) =>
@@ -231,9 +239,8 @@
       );
     };
     
-    // components/SectionWrapper.tsx
     const SectionWrapper = ({ id, title, children, initiallyOpen = false, className = '' }) => {
-      return React.createElement('section', { id: id, className: `my-8 scroll-mt-20 ${className}` },
+      return React.createElement('section', { id: id, className: `my-2 scroll-mt-20 ${className}` }, // Changed my-8 to my-2
         React.createElement('details', {
             className: "group bg-white dark:bg-darkcard border border-slate-300 dark:border-slate-700 rounded-lg shadow-lg overflow-hidden",
             open: initiallyOpen
@@ -249,7 +256,6 @@
       );
     };
 
-    // components/charts/BarChart.tsx
     const BarChart = ({ chartId, data, options, titleText }) => {
       const chartRef = useRef(null);
       const chartInstanceRef = useRef(null);
@@ -300,7 +306,7 @@
             chartInstanceRef.current = null;
           }
         };
-      }, [data, options, titleText, chartId]); // Removed theme from dependencies as it's handled by MutationObserver
+      }, [data, options, titleText, chartId]);
 
       useEffect(() => {
         const observer = new MutationObserver((mutationsList) => {
@@ -314,7 +320,7 @@
                 chartInstanceRef.current.options.scales.x.grid.color = isDark ? '#334155' : '#e2e8f0';
                 chartInstanceRef.current.options.scales.y.ticks.color = isDark ? '#94a3b8' : '#64748b';
                 chartInstanceRef.current.options.scales.y.grid.color = isDark ? '#334155' : '#e2e8f0';
-                if (chartInstanceRef.current.options.scales.y1) { // for multi-axis charts
+                if (chartInstanceRef.current.options.scales.y1) {
                     chartInstanceRef.current.options.scales.y1.ticks.color = isDark ? '#94a3b8' : '#64748b';
                      if(chartInstanceRef.current.options.scales.y1.title) chartInstanceRef.current.options.scales.y1.title.color = isDark ? '#e2e8f0' : '#334155';
                 }
@@ -335,7 +341,6 @@
       );
     };
 
-    // components/sections/HeroSection.tsx
     const HeroSection = ({ id }) => {
       return React.createElement('header', { id: id, className: "text-center py-10 scroll-mt-16" },
         React.createElement('h1', { className: "text-4xl sm:text-5xl font-bold text-primary dark:text-secondary mb-6" },
@@ -347,12 +352,11 @@
         React.createElement('img', {
           src: "https://bucket.mlcdn.com/a/3336/3336910/images/1c085241f943b4b90d82d8901531477643866302.jpeg", 
           alt: "Suplipad Products Banner",
-          className: "w-full max-w-4xl mx-auto rounded-lg shadow-2xl mb-8 aspect-video object-cover" // Added aspect-video and object-cover
+          className: "w-full max-w-4xl mx-auto rounded-lg shadow-2xl mb-8 aspect-video object-cover"
         })
       );
     };
 
-    // components/sections/TargetAudienceSection.tsx
     const TargetAudienceSection = ({ id }) => {
       const audienceList = [
         "Dog owners in urban environments (mainly Santo Domingo).",
@@ -398,9 +402,8 @@
       );
     };
 
-    // components/sections/ExecutiveSummarySection.tsx
     const ExecutiveSummarySection = ({ id }) => {
-      return React.createElement(SectionWrapper, { id: id, title: "2. Executive Summary" },
+      return React.createElement(SectionWrapper, { id: id, title: "2. Executive Summary: Investor Presentation" },
         React.createElement('div', { className: "space-y-3 text-slate-700 dark:text-slate-300" },
           React.createElement('p', null, React.createElement('strong', { className: "text-primary dark:text-secondary" }, "Project Name:"), " Suplipad.shop – Manufacturing and Commercialization of Pet Pads"),
           React.createElement('p', null, React.createElement('strong', { className: "text-primary dark:text-secondary" }, "Opportunity:"), " Become the first Dominican manufacturer of dog pads with national distribution and a DTC (Direct to Consumer) + B2B (stores, veterinarians, distributors) model."),
@@ -410,7 +413,6 @@
       );
     };
 
-    // components/sections/MarketStudySection.tsx
     const MarketStudySection = ({ id }) => {
       const marketGrowthData = {
         labels: ['2020', '2021', '2022', '2023', '2024'],
@@ -450,7 +452,6 @@
       );
     };
 
-    // components/sections/SwotAnalysisSection.tsx
     const SwotAnalysisSection = ({ id }) => {
       const swotData = [
         { category: 'Strengths', points: ['Brand already positioned online', 'Differentiated proposal with plastic base', 'Adaptable local packaging'] },
@@ -481,7 +482,6 @@
       );
     };
     
-    // components/sections/InvestmentProposalSection.tsx
     const InvestmentProposalSection = ({ id }) => {
       const investmentData = [
         { item: 'Industrial warehouse rental (12 months)', amountUSD: 6000 },
@@ -523,7 +523,6 @@
       );
     };
 
-    // components/sections/IncomeProjectionsSection.tsx
     const IncomeProjectionsSection = ({ id }) => {
       const projectionData = [
         { year: 'Year 1', unitsSold: 6000, estimatedRevenueM: 2.4, grossProfitM: 1.2 },
@@ -583,7 +582,6 @@
       );
     };
     
-    // components/sections/CompetitiveAdvantagesSection.tsx
     const CompetitiveAdvantagesSection = ({ id }) => {
       const advantages = [
         'Unique local manufacturer with online presence and subscription model',
@@ -603,7 +601,6 @@
       );
     };
 
-    // components/sections/MachineryOptionsSection.tsx
     const MachineryOptionsSection = ({ id }) => {
       const machineOptionsData = [
           { id: 'rx-pp-120', name: 'Semi-automatic Line RX-PP-120', supplier: 'Quanzhou Ruoxin Machinery', type: 'Semi-automatic Line', speed: 'Up to 100 m/min (~5 pads/sec)', production: '≥ 85% efficiency, ≥ 97% acceptable products', sizes: 'Up to 900 × 600 mm (customizable)', specifications: '80 kW nominal power, compressor 3000-4000 NL/min, 30-35 tons', price: '~USD 50,000 /set FOB China', advantages: ['Affordable price', 'Good efficiency'], disadvantages: ['Not fully automatic', 'Requires trained personnel'], idealFor: 'Initial/moderate local production.'},
@@ -686,7 +683,6 @@
       );
     };
     
-    // components/sections/SalesProjectionsSection.tsx - NEW SECTION
     const SalesProjectionsSection = ({ id }) => {
         const growthTableHeaders = ['Year', 'Dog Household %', 'Dog Homes', 'Pads/year (million)', 'Packs/year', 'Revenue/year (US$)'];
         const growthTableData = [
@@ -775,7 +771,6 @@
         );
     };
 
-    // components/sections/FinancialProjectionsCostAnalysisSection.tsx - NEW SECTION
     const FinancialProjectionsCostAnalysisSection = ({ id }) => {
         const costAnalysisHeaders = ['Item', 'Cost Estimate (USD)', 'Notes'];
         const costAnalysisData = [
@@ -895,10 +890,8 @@
         );
     };
 
-
-    // components/sections/InvestorOfferSection.tsx
     const InvestorOfferSection = ({ id }) => {
-      return React.createElement(SectionWrapper, { id: id, title: "11. Offer" }, // Updated title number
+      return React.createElement(SectionWrapper, { id: id, title: "11. Partnership" },
         React.createElement('div', { className: "bg-primary bg-opacity-10 dark:bg-opacity-20 p-6 rounded-lg shadow-inner" },
           React.createElement('div', { className: "flex items-center text-primary dark:text-secondary mb-4" },
             React.createElement(GiftIcon, { className: "w-8 h-8 mr-3" }),
@@ -917,7 +910,6 @@
       );
     };
 
-    // components/sections/CallToActionSection.tsx
     const CallToActionSection = ({ id }) => {
       return React.createElement('section', { id: id, className: "my-12 scroll-mt-20" },
         React.createElement('div', { className: "bg-primary text-white text-center p-8 sm:p-12 rounded-lg shadow-xl" },
@@ -927,7 +919,7 @@
           ),
           React.createElement('p', { className: "text-2xl sm:text-3xl font-semibold mb-8" }, "Will you join us?"),
           React.createElement('a', {
-              href: "mailto:investor@suplipad.shop?subject=I'm interested in investing in Suplipad.shop",
+              href: "mailto:info@bebelldigitalsolutions.com?subject=I'm interested in investing in Suplipad.shop",
               className: "bg-secondary hover:bg-opacity-80 transition-colors border-none py-3 px-8 text-lg font-semibold text-white rounded-md cursor-pointer shadow-md hover:shadow-lg transform hover:scale-105"
             },
             "Let's Talk!"
@@ -935,8 +927,7 @@
         )
       );
     };
-
-    // components/MainContent.tsx
+    
     const MainContent = () => {
       return React.createElement('main', { className: "container mx-auto max-w-5xl p-4 sm:p-6 lg:p-8" },
         React.createElement(HeroSection, { id: "hero" }),
@@ -948,14 +939,13 @@
         React.createElement(IncomeProjectionsSection, { id: "income-projections" }),
         React.createElement(CompetitiveAdvantagesSection, { id: "competitive-advantages" }),
         React.createElement(MachineryOptionsSection, {id: "machinery-options" }),
-        React.createElement(SalesProjectionsSection, {id: "sales-projections" }), // Added new section
-        React.createElement(FinancialProjectionsCostAnalysisSection, {id: "financial-projections-cost-analysis" }), // Added new section
+        React.createElement(SalesProjectionsSection, {id: "sales-projections" }), 
+        React.createElement(FinancialProjectionsCostAnalysisSection, {id: "financial-projections-cost-analysis" }), 
         React.createElement(InvestorOfferSection, { id: "investor-offer" }),
-        React.createElement(CallToActionSection, { id: "call-to-action" })
+        React.createElement(CallToActionSection, { id: "Conclusion" }) // ID changed to Conclusion
       );
     };
 
-    // App.tsx
     const App = () => {
       const [theme, setTheme] = useState(() => {
         const storedTheme = localStorage.getItem('theme');
@@ -986,21 +976,19 @@
         { id: 'income-projections', title: '6. Income Projections' },
         { id: 'competitive-advantages', title: '7. Competitive Advantages' },
         { id: 'machinery-options', title: '8. Machinery Options' },
-        { id: 'sales-projections', title: '9. Sales Projections (DR)' }, // New nav link
-        { id: 'financial-projections-cost-analysis', title: '10. Financials & Costs' }, // New nav link
-        { id: 'investor-offer', title: '11. Investor Offer' },
-        { id: 'call-to-action', title: '12. Call to Action' },
+        { id: 'sales-projections', title: '9. Sales Projections (DR)' }, 
+        { id: 'financial-projections-cost-analysis', title: '10. Financials & Costs' }, 
+        { id: 'investor-offer', title: '11. Partnership' }, // Title updated
+        { id: 'Conclusion', title: '12. Conclusion' }, // ID and title updated
       ];
 
       const scrollToSection = (sectionId) => {
         const element = document.getElementById(sectionId);
         if (element) {
-          // If the section is within a details element that is closed, open it first
           const detailsParent = element.closest('details');
           if (detailsParent && !detailsParent.open) {
             detailsParent.open = true;
           }
-          // Wait for a brief moment for the details to open if it was closed
           setTimeout(() => {
             element.scrollIntoView({ behavior: 'smooth' });
           }, detailsParent && !detailsParent.open ? 100 : 0);
@@ -1018,7 +1006,6 @@
     };
     // --- END OF COMPONENTS ---
 
-    // Mount the app
     const rootElement = document.getElementById('root');
     if (!rootElement) {
       throw new Error("Could not find root element to mount to");
@@ -1028,14 +1015,8 @@
 
   </script>
   
-  
-  
-  
-  <!-- BACK TO TOP ICON-->
 <script>
-// Create Back-to-Top Button Dynamically
 document.addEventListener("DOMContentLoaded", function () {
-    // Create the button container
     const backToTop = document.createElement("div");
     backToTop.id = "back-to-top";
     backToTop.style.position = "fixed";
@@ -1044,17 +1025,13 @@ document.addEventListener("DOMContentLoaded", function () {
     backToTop.style.display = "none";
     backToTop.style.cursor = "pointer";
     backToTop.style.zIndex = "9999";
-    // Create the image inside the button
     const backToTopImg = document.createElement("img");
     backToTopImg.src = "https://bucket.mlcdn.com/a/3336/3336910/images/29840e122b950f88fdca23072015101b427a9112.png";
     backToTopImg.alt = "Volver arriba";
     backToTopImg.style.width = "40px";
     backToTopImg.style.height = "40px";
-    // Append image to the button
     backToTop.appendChild(backToTopImg);
-    // Append button to the body
     document.body.appendChild(backToTop);
-    // Scroll Event Listener
     window.addEventListener("scroll", function () {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             backToTop.style.display = "block";
@@ -1062,7 +1039,6 @@ document.addEventListener("DOMContentLoaded", function () {
             backToTop.style.display = "none";
         }
     });
-    // Click Event for Scrolling to Top
     backToTop.addEventListener("click", function () {
         window.scrollTo({
             top: 0,
@@ -1071,10 +1047,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
-<!-- END BACK TO TOP ICON-->
-  
-  
-  
   
 </body>
 </html>
