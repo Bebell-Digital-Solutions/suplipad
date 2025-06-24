@@ -1,0 +1,1186 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suplipad.shop Presentación para Inversores</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', // or 'media'
+      theme: {
+        extend: {
+          colors: {
+            primary: '#007fa2',
+            secondary: '#85c3d4',
+            lightbg: '#f4f9fa',
+            darkbg: '#1a202c', // Example dark background
+            darkcard: '#2d3748', // Example dark card background
+            darktext: '#e2e8f0', // Example dark text
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* For scrollbar styling, optional */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #85c3d4;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #007fa2;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: #f4f9fa;
+    }
+    html.dark ::-webkit-scrollbar-track {
+      background-color: #2d3748;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Arial', sans-serif; /* Fallback font */
+    }
+    /* Ensure group-open works for details summary chevron */
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+    details summary::marker {
+      display: none;
+    }
+    .table-responsive table {
+        width: 100%;
+    }
+    .table-responsive th, .table-responsive td {
+        white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react/": "https://esm.sh/react@^19.1.0/"
+  }
+}
+</script>
+</head>
+<body class="bg-lightbg dark:bg-darkbg text-slate-800 dark:text-darktext">
+  <div id="root"></div>
+
+  <script type="module">
+    import React from 'react';
+    import ReactDOM from 'react-dom/client';
+
+    const { useState, useEffect, createContext, useContext, useRef } = React;
+
+    // --- START OF CONTEXTS ---
+    const ThemeContext = createContext(undefined);
+
+    const useTheme = () => {
+      const context = useContext(ThemeContext);
+      if (!context) {
+        throw new Error('useTheme must be used within a ThemeProvider');
+      }
+      return context;
+    };
+    // --- END OF CONTEXTS ---
+
+    // --- START OF ICONS (LUCIDE) ---
+    const SupliPadLogoIcon = (props) => (
+      React.createElement('img', {
+        src: "https://bucket.mlcdn.com/a/3336/3336910/images/26b9b45bca6fe775c5cfc3886da5f55f36ea642a.png",
+        alt: "Logo de Suplipad.shop",
+        ...props
+      })
+    );
+
+    const SunIcon = (props) => (
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('circle', { cx: "12", cy: "12", r: "4" }),
+        React.createElement('path', { d: "M12 2v2" }),
+        React.createElement('path', { d: "M12 20v2" }),
+        React.createElement('path', { d: "m4.93 4.93 1.41 1.41" }),
+        React.createElement('path', { d: "m17.66 17.66 1.41 1.41" }),
+        React.createElement('path', { d: "M2 12h2" }),
+        React.createElement('path', { d: "M20 12h2" }),
+        React.createElement('path', { d: "m6.34 17.66-1.41 1.41" }),
+        React.createElement('path', { d: "m19.07 4.93-1.41 1.41" })
+      )
+    );
+
+    const MoonIcon = (props) => (
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" })
+      )
+    );
+
+    const ChevronDownIcon = (props) => (
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "m6 9 6 6 6-6" })
+      )
+    );
+
+    const CheckCircleIcon = (props) => ( // Using Lucide CheckCircle2
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" }),
+        React.createElement('path', { d: "m9 12 2 2 4-4" })
+      )
+    );
+    
+    const GiftIcon = (props) => (
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('rect', { x: "3", y: "8", width: "18", height: "4", rx: "1" }),
+        React.createElement('path', { d: "M12 8v13" }),
+        React.createElement('path', { d: "M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" }),
+        React.createElement('path', { d: "M7.5 8a2.5 2.5 0 0 1 0-5A4.88 4.88 0 0 1 12 5.5a4.88 4.88 0 0 1 4.5-2.5 2.5 2.5 0 0 1 0 5" })
+      )
+    );
+
+    const WrenchScrewdriverIcon = (props) => ( // Using Lucide Wrench
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" })
+      )
+    );
+
+    const RocketLaunchIcon = (props) => ( // Using Lucide Rocket
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" }),
+        React.createElement('path', { d: "m12 15-3-3a22 22 0 0 1 2-3.95A12.87 12.87 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" }),
+        React.createElement('path', { d: "M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" }),
+        React.createElement('path', { d: "M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" })
+      )
+    );
+
+    const PuzzlePieceIcon = (props) => ( // Using Lucide Puzzle
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "M19.439 7.85c-.049.322-.098.644-.146.966-.049.322-.098.644-.146.966H14v5.716c1.09.098 1.983.586 2.571 1.275.588.688.883 1.473.883 2.356 0 .883-.295 1.668-.883 2.356-.588.688-1.473 1.08-2.454 1.177V22h-4v-1.281c-1.09-.098-1.983-.586-2.571-1.275-.588-.688-.883-1.473-.883-2.356 0-.883.295 1.668.883 2.356.588-.688 1.473 1.08 2.454 1.177V14H5.146c.049-.322.098-.644.146-.966.049-.322.098-.644.146-.966H10V2H5.719c-.098 1.09-.586 1.983-1.275 2.571C3.756 5.159 2.97 5.454 2.088 5.454c-.883 0-1.668-.295-2.356-.883C-1.09 3.983-.586 3.09.281 2H0v4h1.281c.098-1.09.586-1.983 1.275-2.571.688-.588 1.473-.883 2.356-.883.883 0 1.668.295 2.356.883.588.588.883 1.473.883 2.454V10h4.281c.098-1.09.586-1.983 1.275-2.571C14.841 6.74 15.626 6.445 16.509 6.445c.883 0 1.668.295 2.356.883.588.588.883 1.473.883 2.454V10Z" })
+      )
+    );
+
+    const ChartBarIcon = (props) => ( // Using Lucide BarChart3
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('path', { d: "M3 3v18h18" }),
+        React.createElement('path', { d: "M18 17V9" }),
+        React.createElement('path', { d: "M13 17V5" }),
+        React.createElement('path', { d: "M8 17v-3" })
+      )
+    );
+
+    const CurrencyDollarIcon = (props) => ( // Using Lucide DollarSign
+      React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+        React.createElement('line', { x1: "12", x2: "12", y1: "2", y2: "22" }),
+        React.createElement('path', { d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" })
+      )
+    );
+
+    const BeakerIcon = (props) => (
+        React.createElement('svg', { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props },
+            React.createElement('path', { d: "M4.5 3h15" }),
+            React.createElement('path', { d: "M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3" }),
+            React.createElement('path', { d: "M6 14h12" })
+        )
+    );
+    // --- END OF ICONS ---
+
+    // --- START OF COMPONENTS ---
+    const ThemeToggle = () => {
+      const { theme, toggleTheme } = useTheme();
+
+      return React.createElement('button', {
+          onClick: toggleTheme,
+          className: "p-2 rounded-full hover:bg-white hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition-colors",
+          'aria-label': theme === 'light' ? 'Cambiar a tema oscuro' : 'Cambiar a tema claro'
+        },
+        theme === 'light' ?
+        React.createElement(MoonIcon, { className: "w-6 h-6 text-white" }) :
+        React.createElement(SunIcon, { className: "w-6 h-6 text-white" })
+      );
+    };
+
+    const Sidebar = ({ navLinks, onNavigate }) => {
+      return React.createElement('div', { className: "w-[250px] bg-primary h-screen fixed top-0 left-0 flex flex-col items-center p-4 text-white shadow-lg z-10 font-sans" },
+        React.createElement('div', { className: "my-4" },
+          React.createElement(SupliPadLogoIcon, { className: "w-50 h-auto" }) 
+        ),
+        React.createElement('a', {
+            href: "https://tidycal.com/bebelldigitalsolutions/googlemeet-m8egz9q",
+            className: "bg-secondary hover:bg-opacity-80 transition-colors w-full text-center border-none text-white py-2.5 px-4 rounded-md cursor-pointer my-4 text-sm font-semibold"
+          },
+          "Agendar Llamada"
+        ),
+        React.createElement('nav', { className: "flex-grow w-full overflow-y-auto" },
+          navLinks.map((link) =>
+            React.createElement('a', {
+                key: link.id,
+                onClick: () => onNavigate(link.id),
+                className: "block text-white no-underline my-2 py-1.5 px-3 rounded-md font-medium cursor-pointer hover:bg-white hover:bg-opacity-20 transition-colors text-sm"
+              },
+              link.title
+            )
+          )
+        ),
+        React.createElement('div', { className: "mt-auto mb-2" },
+          React.createElement(ThemeToggle, null)
+        )
+      );
+    };
+    
+    const SectionWrapper = ({ id, title, children, initiallyOpen = false, className = '' }) => {
+      return React.createElement('section', { id: id, className: `my-2 scroll-mt-20 ${className}` },
+        React.createElement('details', {
+            className: "group bg-white dark:bg-darkcard border border-slate-300 dark:border-slate-700 rounded-lg shadow-lg overflow-hidden",
+            open: initiallyOpen
+          },
+          React.createElement('summary', { className: "flex justify-between items-center cursor-pointer p-4 sm:p-5 bg-secondary dark:bg-opacity-80 text-white font-bold text-lg hover:bg-primary dark:hover:bg-opacity-100 transition-colors list-none" },
+            title,
+            React.createElement(ChevronDownIcon, { className: "w-5 h-5 transform group-open:rotate-180 transition-transform" })
+          ),
+          React.createElement('div', { className: "p-4 sm:p-6 text-slate-700 dark:text-slate-300" },
+            children
+          )
+        )
+      );
+    };
+
+    const BarChart = ({ chartId, data, options, titleText }) => {
+      const chartRef = useRef(null);
+      const chartInstanceRef = useRef(null);
+
+      useEffect(() => {
+        if (chartRef.current && data && window.Chart) {
+          if (chartInstanceRef.current) {
+            chartInstanceRef.current.destroy();
+          }
+          
+          const isDark = document.documentElement.classList.contains('dark');
+          const defaultOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: { color: isDark ? '#e2e8f0' : '#334155' }
+              },
+              title: {
+                display: !!titleText, // Ensure title displays only if text is provided
+                text: titleText,
+                color: isDark ? '#e2e8f0' : '#334155',
+                font: { size: 16 }
+              },
+            },
+            scales: {
+              x: {
+                ticks: { color: isDark ? '#94a3b8' : '#64748b' },
+                grid: { color: isDark ? '#334155' : '#e2e8f0' },
+                title: options && options.scales && options.scales.x && options.scales.x.title ? { ...options.scales.x.title, color: isDark ? '#e2e8f0' : '#334155' } : undefined
+              },
+              y: {
+                ticks: { color: isDark ? '#94a3b8' : '#64748b' },
+                grid: { color: isDark ? '#334155' : '#e2e8f0' },
+                 title: options && options.scales && options.scales.y && options.scales.y.title ? { ...options.scales.y.title, color: isDark ? '#e2e8f0' : '#334155' } : undefined
+              },
+              y1: options && options.scales && options.scales.y1 ? {
+                ...options.scales.y1,
+                ticks: { ...options.scales.y1.ticks, color: isDark ? '#94a3b8' : '#64748b' },
+                grid: { ...options.scales.y1.grid, color: isDark ? '#334155' : '#e2e8f0' },
+                title: options.scales.y1.title ? { ...options.scales.y1.title, color: isDark ? '#e2e8f0' : '#334155' } : undefined
+              } : undefined
+            }
+          };
+          
+          let finalOptions = defaultOptions;
+          if (options) {
+            finalOptions = {
+              ...defaultOptions,
+              ...options,
+              plugins: { ...defaultOptions.plugins, ...options.plugins },
+              scales: {
+                 x: { ...defaultOptions.scales.x, ...(options.scales && options.scales.x) },
+                 y: { ...defaultOptions.scales.y, ...(options.scales && options.scales.y) },
+                 y1: options.scales && options.scales.y1 ? { ...defaultOptions.scales.y1, ...options.scales.y1 } : undefined,
+              }
+            };
+             // Explicitly set title colors if they exist in user options, overriding defaults if necessary
+            if (options.plugins && options.plugins.title && options.plugins.title.color) {
+                finalOptions.plugins.title.color = options.plugins.title.color;
+            } else {
+                 finalOptions.plugins.title.color = isDark ? '#e2e8f0' : '#334155';
+            }
+            if (options.scales && options.scales.x && options.scales.x.title && options.scales.x.title.color) {
+                finalOptions.scales.x.title.color = options.scales.x.title.color;
+            } else if (finalOptions.scales.x.title) {
+                 finalOptions.scales.x.title.color = isDark ? '#e2e8f0' : '#334155';
+            }
+             if (options.scales && options.scales.y && options.scales.y.title && options.scales.y.title.color) {
+                finalOptions.scales.y.title.color = options.scales.y.title.color;
+            } else if (finalOptions.scales.y.title) {
+                 finalOptions.scales.y.title.color = isDark ? '#e2e8f0' : '#334155';
+            }
+            if (options.scales && options.scales.y1 && options.scales.y1.title && options.scales.y1.title.color) {
+                finalOptions.scales.y1.title.color = options.scales.y1.title.color;
+            } else if (finalOptions.scales.y1 && finalOptions.scales.y1.title) {
+                 finalOptions.scales.y1.title.color = isDark ? '#e2e8f0' : '#334155';
+            }
+          }
+
+
+          chartInstanceRef.current = new window.Chart(chartRef.current, {
+            type: 'bar',
+            data: data,
+            options: finalOptions,
+          });
+        }
+        return () => {
+          if (chartInstanceRef.current) {
+            chartInstanceRef.current.destroy();
+            chartInstanceRef.current = null;
+          }
+        };
+      }, [data, options, titleText, chartId]);
+
+      useEffect(() => {
+        const observer = new MutationObserver((mutationsList) => {
+          for (const mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+              if (chartInstanceRef.current) {
+                const isDark = document.documentElement.classList.contains('dark');
+                const newColor = isDark ? '#e2e8f0' : '#334155';
+                const newGridColor = isDark ? '#334155' : '#e2e8f0';
+                const newTickColor = isDark ? '#94a3b8' : '#64748b';
+
+                if (chartInstanceRef.current.options.plugins.legend) {
+                    chartInstanceRef.current.options.plugins.legend.labels.color = newColor;
+                }
+                if (chartInstanceRef.current.options.plugins.title) {
+                    chartInstanceRef.current.options.plugins.title.color = newColor;
+                }
+                if (chartInstanceRef.current.options.scales.x) {
+                    chartInstanceRef.current.options.scales.x.ticks.color = newTickColor;
+                    chartInstanceRef.current.options.scales.x.grid.color = newGridColor;
+                    if (chartInstanceRef.current.options.scales.x.title) {
+                        chartInstanceRef.current.options.scales.x.title.color = newColor;
+                    }
+                }
+                if (chartInstanceRef.current.options.scales.y) {
+                    chartInstanceRef.current.options.scales.y.ticks.color = newTickColor;
+                    chartInstanceRef.current.options.scales.y.grid.color = newGridColor;
+                     if (chartInstanceRef.current.options.scales.y.title) {
+                        chartInstanceRef.current.options.scales.y.title.color = newColor;
+                    }
+                }
+                if (chartInstanceRef.current.options.scales.y1) { 
+                    chartInstanceRef.current.options.scales.y1.ticks.color = newTickColor;
+                    chartInstanceRef.current.options.scales.y1.grid.color = newGridColor; // Assuming y1 also has grid
+                     if (chartInstanceRef.current.options.scales.y1.title) {
+                         chartInstanceRef.current.options.scales.y1.title.color = newColor;
+                     }
+                }
+                chartInstanceRef.current.update();
+              }
+            }
+          }
+        });
+        observer.observe(document.documentElement, { attributes: true });
+        return () => observer.disconnect();
+      }, []);
+
+      return React.createElement('div', { style: { height: '400px' } }, 
+        React.createElement('canvas', { ref: chartRef, id: chartId })
+      );
+    };
+
+    const HeroSection = ({ id }) => {
+      return React.createElement('header', { id: id, className: "text-center py-10 scroll-mt-16" },
+        React.createElement('h1', { className: "text-4xl sm:text-5xl font-bold text-primary dark:text-secondary mb-6" },
+          "Suplipad.shop"
+        ),
+        React.createElement('p', { className: "text-xl sm:text-2xl text-slate-600 dark:text-slate-400 mb-6" },
+          "Estrategia de Redes Sociales, Plan de Producto y Propuesta para Inversores"
+        ),
+        React.createElement('img', {
+          src: "https://bucket.mlcdn.com/a/3336/3336910/images/57026f15937d8b9e24e3aa55f3c3881ae93ed0e9.jpeg", 
+          alt: "Banner de Productos Suplipad",
+          className: "w-full max-w-5xl mx-auto rounded-lg shadow-2xl mb-2 aspect-video object-cover"
+        })
+      );
+    };
+
+    const TargetAudienceSection = ({ id }) => {
+      const audienceList = [
+        "Dueños de perros en entornos urbanos (principalmente Santo Domingo).",
+        "Edades: 24–45",
+        "Género: 60% mujeres, 40% hombres",
+        "Ingresos: Clase media a media-alta",
+        "Estilo de vida: Profesionales ocupados, familias, residentes de apartamentos, padres primerizos de mascotas"
+      ];
+      const lauraPainPoints = [
+        "Vive en un edificio alto, sin patio trasero",
+        "Odia limpiar accidentes",
+        "Encuentra molesto comprar pads con frecuencia",
+        "No confía en opciones baratas que gotean"
+      ];
+      const lauraGoals = [
+        "Mantener el apartamento limpio",
+        "Entrenar a su pug fácilmente",
+        "Usar productos ecológicos y de calidad"
+      ];
+
+      return React.createElement(SectionWrapper, { id: id, title: "1. Público Objetivo y Buyer Persona", initiallyOpen: true },
+        React.createElement('div', { className: "grid md:grid-cols-2 gap-6" },
+          React.createElement('div', null,
+            React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-3" }, "Perfil de la Audiencia"),
+            React.createElement('ul', { className: "list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300" },
+              audienceList.map(item => React.createElement('li', { key: item }, item))
+            )
+          ),
+          React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow" },
+            React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-3" }, "Ejemplo de Buyer Persona: Laura"),
+            React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 mb-1" }, React.createElement('strong', null, "Edad:"), " 32"),
+            React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 mb-3" }, React.createElement('strong', null, "Ocupación:"), " Coordinadora de Marketing"),
+            React.createElement('h4', { className: "font-semibold text-slate-700 dark:text-slate-200 mb-1" }, "Puntos de Dolor:"),
+            React.createElement('ul', { className: "list-disc list-inside space-y-1 text-sm text-slate-600 dark:text-slate-400" },
+              lauraPainPoints.map(item => React.createElement('li', { key: item }, item))
+            ),
+            React.createElement('h4', { className: "font-semibold text-slate-700 dark:text-slate-200 mt-3 mb-1" }, "Metas:"),
+            React.createElement('ul', { className: "list-disc list-inside space-y-1 text-sm text-slate-600 dark:text-slate-400" },
+              lauraGoals.map(item => React.createElement('li', { key: item }, item))
+            )
+          )
+        )
+      );
+    };
+
+    const ExecutiveSummarySection = ({ id }) => {
+      return React.createElement(SectionWrapper, { id: id, title: "2. Resumen Ejecutivo" },
+        React.createElement('div', { className: "space-y-3 text-slate-700 dark:text-slate-300" },
+          React.createElement('p', null, React.createElement('strong', { className: "text-primary dark:text-secondary" }, "Nombre del Proyecto:"), " Suplipad.shop – Fabricación y Comercialización de Pads para Mascotas"),
+          React.createElement('p', null, React.createElement('strong', { className: "text-primary dark:text-secondary" }, "Oportunidad:"), " Convertirse en el primer fabricante dominicano de pads para perros con distribución nacional y modelo DTC (Directo al Consumidor) + B2B (tiendas, veterinarios, distribuidores)."),
+          React.createElement('p', null, React.createElement('strong', { className: "text-primary dark:text-secondary" }, "Ubicación Propuesta:"), " Santo Domingo, República Dominicana"),
+          React.createElement('p', null, React.createElement('strong', { className: "text-primary dark:text-secondary" }, "Inversión Requerida:"), " USD $45,000 – $55,000")
+        )
+      );
+    };
+
+const MarketStudySection = ({ id }) => {
+  const marketGrowthData = {
+    labels: ['2020', '2021', '2022', '2023', '2024'],
+    datasets: [{
+      label: 'Tasa de Crecimiento Anual (%)',
+      data: [10.5, 11.2, 12.8, 13.5, 14.1], // Datos actualizados
+      backgroundColor: '#007fa2',
+      borderColor: '#005f79',
+      borderWidth: 2,
+    }],
+  };
+
+  const marketGrowthOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => `${context.dataset.label}: ${context.raw}%`
+        }
+      }
+    },
+    scales: { 
+      y: { 
+        beginAtZero: false, // Ajustado para que no inicie en cero si no es necesario
+        min: 8, // Mínimo valor para el eje Y
+        title: { 
+          display: true, 
+          text: 'Tasa de Crecimiento (%)',
+          font: { weight: 'bold' }
+        },
+        ticks: { callback: (value) => `${value}%` }
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Año',
+          font: { weight: 'bold' },
+          padding: { bottom: 10 } 
+        }
+      }
+    }
+  };
+
+  const insights = [
+    React.createElement(React.Fragment, {key: "ms1_frag"}, React.createElement('strong', null, "Tamaño del Mercado:"), " Más de 500,000 perros registrados y en aumento (registros veterinarios oficiales)."),
+    React.createElement(React.Fragment, {key: "ms2_frag"}, React.createElement('strong', null, "Crecimiento del Mercado de Mascotas en RD:"), " Promedio +12.4% CAGR (2020–2024)."),
+    React.createElement(React.Fragment, {key: "ms3_frag"}, React.createElement('strong', null, "Tendencias:"), " Urbanización (+3.2% anual), tenencia de perros en apartamentos (+18% desde 2020), creciente enfoque en la higiene de mascotas."),
+    React.createElement(React.Fragment, {key: "ms4_frag"}, React.createElement('strong', null, "Importación de Pads:"), " El 95-98% de los pads vendidos son importados, con impuestos de importación del 25-30% que elevan los costos."),
+    React.createElement(React.Fragment, {key: "ms5_frag"}, React.createElement('strong', null, "Problemas de Suministro:"), " El 68% de los veterinarios reportan desabastecimiento mensual de pads importados.")
+  ];
+
+  return React.createElement(SectionWrapper, { id: id, title: "3. Estudio de Mercado (Resumen)" },
+    React.createElement('div', { className: "space-y-6 pb-6" }, // Añadido padding bottom
+      React.createElement('div', null,
+        React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-3" }, "Perspectivas Clave del Mercado"),
+        React.createElement('ul', { className: "list-disc list-inside space-y-2 text-slate-700 dark:text-slate-300" },
+          insights.map((item, index) => React.createElement('li', { key: `insight-${index}`, className: "leading-relaxed" }, item))
+        )
+      ),
+      React.createElement('div', null,
+        React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-4 text-center" }, "Crecimiento del Mercado de Mascotas en República Dominicana"),
+        React.createElement('div', { className: "bg-white dark:bg-slate-800 p-4 rounded-lg shadow" }, // Contenedor para el gráfico con fondo
+          React.createElement('div', { className: "h-64 md:h-80" }, // Altura fija para el gráfico
+            React.createElement(BarChart, { 
+              chartId: "marketGrowthChart", 
+              data: marketGrowthData, 
+              options: marketGrowthOptions,
+              // titleText: "Crecimiento Anual del Mercado de Mascotas en RD" // Opcional si ya está en h3
+            })
+          )
+        ),
+        React.createElement('p', { 
+          className: "text-xs text-center text-slate-500 dark:text-slate-400 italic mt-3 mb-0" // Ajuste de margen para la fuente
+        }, "Fuente: Informes de la industria y datos de la asociación veterinaria (proyecciones 2020-2024)")
+      )
+    )
+  );
+};
+
+
+    const SwotAnalysisSection = ({ id }) => {
+      const swotData = [
+        { category: 'Fortalezas', points: ['Marca ya posicionada online', 'Propuesta diferenciada con base plástica', 'Packaging local adaptable'] },
+        { category: 'Debilidades', points: ['Capital inicial limitado', 'Dependencia de canales digitales en fase inicial'] },
+        { category: 'Oportunidades', points: ['Producción local reduce costos y tiempos', 'Venta a distribuidores, veterinarios, supermercados', 'Exportación a Haití e islas del Caribe'] },
+        { category: 'Amenazas', points: ['Entrada de nuevas marcas internacionales', 'Variaciones en precios de materia prima'] },
+      ];
+      const getCategoryColor = (category) => {
+        switch (category) {
+          case 'Fortalezas': return 'text-green-600 dark:text-green-400';
+          case 'Debilidades': return 'text-red-600 dark:text-red-400';
+          case 'Oportunidades': return 'text-blue-600 dark:text-blue-400';
+          case 'Amenazas': return 'text-yellow-600 dark:text-yellow-400';
+          default: return 'text-primary dark:text-secondary';
+        }
+      };
+      return React.createElement(SectionWrapper, { id: id, title: "4. Análisis FODA – Suplipad.shop" },
+        React.createElement('div', { className: "grid md:grid-cols-2 gap-6" },
+          swotData.map((item) =>
+            React.createElement('div', { key: item.category, className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow" },
+              React.createElement('h3', { className: `text-xl font-semibold mb-2 ${getCategoryColor(item.category)}` }, item.category),
+              React.createElement('ul', { className: "list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300" },
+                item.points.map((point, index) => React.createElement('li', { key: index }, point))
+              )
+            )
+          )
+        )
+      );
+    };
+    
+    const InvestmentProposalSection = ({ id }) => {
+      const investmentData = [
+        { item: 'Alquiler nave industrial (12 meses)', amountUSD: 6000 },
+        { item: 'Compra de maquinaria de producción', amountUSD: 15000 },
+        { item: 'Empacadoras y selladoras automáticas', amountUSD: 5000 },
+        { item: 'Capital humano inicial (3 empleados)', amountUSD: 9000 },
+        { item: 'Insumos y materias primas (6 meses)', amountUSD: 6000 },
+        { item: 'Marketing, empaque y branding', amountUSD: 3000 },
+        { item: 'Reserva de contingencia y operaciones', amountUSD: 6000 },
+      ];
+      const totalInvestment = investmentData.reduce((sum, item) => sum + item.amountUSD, 0);
+
+      return React.createElement(SectionWrapper, { id: id, title: "5. Propuesta de Inversión" },
+        React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-4" },
+          `Inversión Total Estimada: USD $${totalInvestment.toLocaleString()}`
+        ),
+        React.createElement('div', { className: "overflow-x-auto table-responsive" },
+          React.createElement('table', { className: "min-w-full bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-700 rounded-md" },
+            React.createElement('thead', { className: "bg-slate-100 dark:bg-slate-700" },
+              React.createElement('tr', null,
+                React.createElement('th', { className: "px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider" }, "Concepto"),
+                React.createElement('th', { className: "px-6 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider" }, "Monto (USD)")
+              )
+            ),
+            React.createElement('tbody', { className: "divide-y divide-slate-200 dark:divide-slate-700" },
+              investmentData.map((detail) =>
+                React.createElement('tr', { key: detail.item },
+                  React.createElement('td', { className: "px-6 py-4 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300" }, detail.item),
+                  React.createElement('td', { className: "px-6 py-4 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300 text-right" }, `$${detail.amountUSD.toLocaleString()}`)
+                )
+              ),
+              React.createElement('tr', { className: "bg-slate-50 dark:bg-slate-600 font-semibold" },
+                React.createElement('td', { className: "px-6 py-4 whitespace-nowrap text-sm text-slate-800 dark:text-slate-100" }, "Total Aproximado"),
+                React.createElement('td', { className: "px-6 py-4 whitespace-nowrap text-sm text-slate-800 dark:text-slate-100 text-right" }, `$${totalInvestment.toLocaleString()}`)
+              )
+            )
+          )
+        )
+      );
+    };
+
+    const IncomeProjectionsSection = ({ id }) => {
+      const projectionData = [
+        { year: 'Año 1', unitsSold: 6000, estimatedRevenueM: 2.4, grossProfitM: 1.2 },
+        { year: 'Año 2', unitsSold: 15000, estimatedRevenueM: 6, grossProfitM: 3.2 },
+        { year: 'Año 5', unitsSold: 60000, estimatedRevenueM: 24, grossProfitM: 12 },
+        { year: 'Año 10', unitsSold: 150000, estimatedRevenueM: 60, grossProfitM: 30 },
+      ];
+      const chartData = {
+        labels: projectionData.map(p => p.year),
+        datasets: [
+          { label: 'Unidades Vendidas (Paquetes)', data: projectionData.map(p => p.unitsSold), backgroundColor: '#85c3d4', borderColor: '#6aa7b8', yAxisID: 'y', order: 2 },
+          { label: 'Ingresos Estimados (RD$ M)', data: projectionData.map(p => p.estimatedRevenueM), backgroundColor: '#007fa2', borderColor: '#005f79', yAxisID: 'y1', order: 1 },
+          { label: 'Ganancia Bruta (RD$ M)', data: projectionData.map(p => p.grossProfitM), backgroundColor: '#57a0af', borderColor: '#408090', yAxisID: 'y1', order: 0 }
+        ]
+      };
+      const chartOptions = {
+        interaction: { mode: 'index', intersect: false },
+        scales: {
+          y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'Unidades Vendidas (Paquetes)' }, ticks: { callback: (value) => typeof value === 'number' ? value.toLocaleString() : value } },
+          y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Monto (RD$ Millones)' }, grid: { drawOnChartArea: false }, ticks: { callback: (value) => typeof value === 'number' ? value.toLocaleString() : value } },
+        },
+        plugins: { tooltip: { callbacks: { label: (context) => {
+          let label = context.dataset.label || '';
+          if (label) label += ': ';
+          if (context.parsed.y !== null) {
+            label += context.dataset.yAxisID === 'y' ? context.parsed.y.toLocaleString() + ' Paquetes' : 'RD$ ' + context.parsed.y.toLocaleString() + 'M';
+          }
+          return label;
+        }}}}
+      };
+
+      return React.createElement(SectionWrapper, { id: id, title: "6. Proyecciones de Ingresos (Modelo B2C + B2B)" },
+        React.createElement('div', { className: "overflow-x-auto table-responsive mb-6" },
+          React.createElement('table', { className: "min-w-full bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-700 rounded-md" },
+            React.createElement('thead', { className: "bg-slate-100 dark:bg-slate-700" },
+              React.createElement('tr', null,
+                ['Año', 'Unidades Vendidas (Paquetes)', 'Ingresos Est. (RD$ M)', 'Ganancia Bruta (RD$ M)'].map(header =>
+                  React.createElement('th', { key: header, className: `px-6 py-3 text-${header === 'Año' ? 'left' : 'right'} text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider` }, header)
+                )
+              )
+            ),
+            React.createElement('tbody', { className: "divide-y divide-slate-200 dark:divide-slate-700" },
+              projectionData.map((proj) =>
+                React.createElement('tr', { key: proj.year },
+                  React.createElement('td', { className: "px-6 py-4 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300" }, proj.year),
+                  React.createElement('td', { className: "px-6 py-4 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300 text-right" }, proj.unitsSold.toLocaleString()),
+                  React.createElement('td', { className: "px-6 py-4 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300 text-right" }, proj.estimatedRevenueM.toLocaleString()),
+                  React.createElement('td', { className: "px-6 py-4 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300 text-right" }, proj.grossProfitM.toLocaleString())
+                )
+              )
+            )
+          )
+        ),
+        React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 my-2" }, "Margen bruto estimado: 50% (incluyendo distribución y empleados)"),
+        React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 mb-6" }, "Punto de equilibrio: Dentro de los primeros 13–15 meses"),
+        React.createElement(BarChart, { chartId: "incomeProjectionChart", data: chartData, options: chartOptions, titleText: "Proyecciones de Ingresos a lo Largo de los Años" })
+      );
+    };
+    
+    const CompetitiveAdvantagesSection = ({ id }) => {
+      const advantages = [
+        'Único fabricante local con presencia online y modelo por suscripción',
+        'Capacidad de ajustar producción a demanda local',
+        'Menor dependencia de importaciones y precios internacionales',
+        'Posibilidad de marca blanca para distribuidores',
+      ];
+      return React.createElement(SectionWrapper, { id: id, title: "7. Ventajas Competitivas" },
+        React.createElement('ul', { className: "space-y-3" },
+          advantages.map((advantage, index) =>
+            React.createElement('li', { key: index, className: "flex items-start" },
+              React.createElement(CheckCircleIcon, { className: "w-5 h-5 text-green-500 dark:text-green-400 mr-2 mt-1 flex-shrink-0" }),
+              React.createElement('span', { className: "text-slate-700 dark:text-slate-300" }, advantage)
+            )
+          )
+        )
+      );
+    };
+
+const MachineryOptionsSection = ({ id }) => {
+  const videoUrl = "https://cdn.shopify.com/videos/c/o/v/8c94f53848b84794a8d3dfea24df7e86.mp4";
+  
+  const machineOptionsData = [
+    { id: 'rx-pp-120', name: 'Línea Semiautomática RX‑PP‑120', supplier: 'Quanzhou Ruoxin Machinery', type: 'Línea Semiautomática', speed: 'Hasta 100 m/min (~5 pads/seg)', production: '≥ 85% eficiencia, ≥ 97% productos aceptables', sizes: 'Hasta 900 × 600 mm (personalizable)', specifications: '80 kW potencia nominal, compresor 3000‑4000 NL/min, 30‑35 toneladas', price: '~USD 50,000 /set FOB China', advantages: ['Precio accesible', 'Buena eficiencia'], disadvantages: ['No es totalmente automática', 'Requiere personal capacitado'], idealFor: 'Producción local inicial/moderada.'},
+    { id: 'cd150-fc', name: 'Máquina Semiautomática CD150‑FC', supplier: 'Fujian Yichuan Automation', type: 'Máquina Semiautomática', speed: 'No especificada, diseñada para estabilidad', price: 'USD 20,000–30,000 FOB China', advantages: ['Muy costo-eficiente', 'Tecnología adecuada para producción local'], disadvantages: ['Menor velocidad', 'Tecnología más básica'], idealFor: 'Prueba de mercado, inversión mínima, inicio pequeño o piloto.' },
+    { id: 'yc-cd200-sv', name: 'Línea Automática YC‑CD200‑SV', supplier: 'Fujian Yichuan Automation', type: 'Línea Automática', price: 'USD 307,700–615,000 FOB China', power: '230 kW', dimensions: '30 m × 7 m × 5 m, 45 toneladas', speed: '>400 pzs/min (~7 pads/seg)', certifications: 'CE, ISO9001, SGS', advantages: ['Alta productividad', 'Totalmente automática', 'Ideal para gran escala y clientes B2B'], disadvantages: ['Inversión inicial significativa'], idealFor: 'Producción a gran escala, exportación.'},
+  ];
+  
+  const quickComparisonHeaders = ['Máquina', 'Nivel', 'Velocidad', 'Precio (FOB)', 'Ideal para…'];
+  const quickComparisonData = [
+    ['RX-PP-120', 'Semiautomática', '100 m/min', 'USD 50k', 'Producción local inicial/moderada'],
+    ['CD150-FC', 'Básica', 'Estable', 'USD 20-30k', 'Prueba de mercado, inversión mínima'],
+    ['YC-CD200-SV', 'Totalmente Automática', '>400 pads/min', 'USD 308-615k', 'Producción a gran escala, exportación']
+  ];
+
+  const MachineCard = ({ machine }) => {
+    let IconComponent;
+    if (machine.type.toLowerCase().includes('automática')) IconComponent = RocketLaunchIcon;
+    else if (machine.name.includes('RX-PP-120')) IconComponent = WrenchScrewdriverIcon;
+    else IconComponent = PuzzlePieceIcon;
+
+    return React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow" },
+      React.createElement('div', { className: "flex items-center mb-3" },
+        React.createElement(IconComponent, { className: "w-8 h-8 text-primary dark:text-secondary mr-3 flex-shrink-0" }),
+        React.createElement('h4', { className: "text-xl font-semibold text-primary dark:text-secondary" }, machine.name)
+      ),
+      React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 mb-1" }, React.createElement('strong', null, "Proveedor: "), machine.supplier),
+      React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 mb-1" }, React.createElement('strong', null, "Tipo: "), machine.type),
+      React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 mb-3" }, React.createElement('strong', null, "Precio: "), machine.price),
+      machine.speed && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Velocidad: "), machine.speed),
+      machine.production && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Producción: "), machine.production),
+      machine.sizes && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Tamaños: "), machine.sizes),
+      machine.specifications && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Especificaciones: "), machine.specifications),
+      machine.power && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Potencia: "), machine.power),
+      machine.dimensions && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Dimensiones/Peso: "), machine.dimensions),
+      machine.certifications && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Certificaciones: "), machine.certifications),
+      React.createElement('div', { className: "mt-3" },
+        React.createElement('strong', { className: "text-sm text-slate-700 dark:text-slate-200" }, "Ventajas:"),
+        React.createElement('ul', { className: "list-disc list-inside text-xs text-slate-600 dark:text-slate-400 pl-4" },
+          machine.advantages.map(adv => React.createElement('li', { key: adv }, adv))
+        )
+      ),
+      React.createElement('div', { className: "mt-2" },
+        React.createElement('strong', { className: "text-sm text-slate-700 dark:text-slate-200" }, "Desventajas:"),
+        React.createElement('ul', { className: "list-disc list-inside text-xs text-slate-600 dark:text-slate-400 pl-4" },
+          machine.disadvantages.map(dis => React.createElement('li', { key: dis }, dis))
+        )
+      ),
+      React.createElement('p', { className: "text-sm mt-3 font-semibold text-slate-700 dark:text-slate-200" }, React.createElement('strong', null, "Ideal para: "), machine.idealFor)
+    );
+  };
+
+  return React.createElement(SectionWrapper, { id: id, title: "8. Opciones de Maquinaria para Producción" },
+    React.createElement('div', { className: "mb-8 rounded-lg overflow-hidden" },
+      React.createElement('video', { 
+        className: "w-full rounded-lg shadow-md",
+        controls: true,
+        autoPlay: false,
+        muted: true,
+        playsInline: true
+      },
+        React.createElement('source', { src: videoUrl, type: "video/mp4" }),
+        "Su navegador no soporta la etiqueta de video."
+      )
+    ),
+    React.createElement('div', { className: "grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8" },
+      machineOptionsData.map(machine => React.createElement(MachineCard, { key: machine.id, machine: machine }))
+    ),
+    React.createElement('h3', { className: "text-2xl font-semibold text-primary dark:text-secondary mb-3 mt-8" }, "Comparativo Rápido"),
+    React.createElement('div', { className: "overflow-x-auto table-responsive mb-8" },
+      React.createElement('table', { className: "min-w-full bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-700 rounded-md" },
+        React.createElement('thead', { className: "bg-slate-100 dark:bg-slate-700" },
+          React.createElement('tr', null,
+            quickComparisonHeaders.map(header => React.createElement('th', { key: header, className: "px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider" }, header))
+          )
+        ),
+        React.createElement('tbody', { className: "divide-y divide-slate-200 dark:divide-slate-700" },
+          quickComparisonData.map((row, rowIndex) => React.createElement('tr', { key: rowIndex },
+            row.map((cell, cellIndex) => React.createElement('td', { key: cellIndex, className: "px-4 py-2 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300" }, cell))
+          ))
+        )
+      )
+    ),
+    React.createElement('h3', { className: "text-2xl font-semibold text-primary dark:text-secondary mb-3 mt-8" }, "Recomendación"),
+    React.createElement('div', { className: "space-y-2 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow" },
+        React.createElement('p', null, "Si buscas iniciar producción local con buena eficiencia sin una gran inversión, la ", React.createElement('strong', null, "RX‑PP‑120 (~USD 50K)"), " es la opción más equilibrada."),
+        React.createElement('p', null, "Para inversión mínima y validar demanda, la ", React.createElement('strong', null, "CD150‑FC (~USD 20‑30K)"), " ofrece un punto de entrada."),
+        React.createElement('p', null, "Si tu meta es escalar y abastecer a toda la isla y distribuidores internacionales, la ", React.createElement('strong', null, "YC‑CD200‑SV (~USD 308K+)"), " es la opción eficiente a largo plazo.")
+    ),
+    React.createElement('div', { className: "mt-8 p-4 bg-yellow-50 dark:bg-yellow-700 dark:bg-opacity-30 border-l-4 border-yellow-400 dark:border-yellow-500 text-yellow-700 dark:text-yellow-200 rounded" },
+        React.createElement('p', {className: "font-semibold"}, "Información Adicional:"),
+        React.createElement('p', null, "Fichas técnicas completas, contacto de proveedores, opciones de envío marítimo o estimaciones de aranceles y transporte a República Dominicana pueden ser proporcionadas bajo solicitud o durante una debida diligencia más profunda.")
+    )
+  );
+};
+    
+    const SalesProjectionsSection = ({ id }) => {
+        const growthTableHeaders = ['Año', '% Hogares con Perro', 'Hogares con Perro', 'Pads/año (millones)', 'Paquetes/año', 'Ingresos/año (US$)'];
+        const growthTableData = [
+            ['1', '~8–9%', '700,000', '218', '4.36 millones', 'US$700,000'],
+            ['2', '~9.5% (+7%)', '770,000', '240', '4.8 millones', 'US$770,000'],
+            ['5', '~11%', '1,000,000', '312', '6.24 millones', 'US$1,000,000'],
+            ['10', '~13%', '1,150,000', '360', '7.2 millones', 'US$1,150,000']
+        ];
+        const keyConsiderations = [
+            "Estas proyecciones conservadoras asumen una baja penetración de mercado.",
+            "Los paquetes (base + spray + pads) pueden aumentar el uso de pads por hogar.",
+            "Las ventas B2B dirigidas (veterinarios, tiendas de mascotas) pueden ampliar el alcance más allá de las ventas al consumidor.",
+            "La expansión regional potencial (ej. Caribe) podría aumentar significativamente los volúmenes."
+        ];
+
+        return React.createElement(SectionWrapper, { id: id, title: "9. Proyecciones de Ventas (República Dominicana)" },
+            React.createElement('div', { className: "space-y-6" },
+                React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-2" }, "1. Número Estimado de Hogares con Perros"),
+                    React.createElement('ul', { className: "list-disc list-inside space-y-1" },
+                        React.createElement('li', null, "Población RD (2025): ~11.4 millones"),
+                        React.createElement('li', null, "Datos globales muestran que ~30–40% de los hogares tienen un perro"),
+                        React.createElement('li', null, "Conservadoramente, asumir 8–12% de hogares dominicanos con perros → aproximadamente ", React.createElement('strong', null, "700,000–1,050,000 hogares"))
+                    )
+                ),
+                React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-2" }, "2. Suposiciones de Consumo de Pads"),
+                    React.createElement('ul', { className: "list-disc list-inside space-y-1" },
+                        React.createElement('li', null, "Hogar urbano típico usa 4–8 pads por semana"),
+                        React.createElement('li', null, "Estimación promedio: 6 pads/semana → ~", React.createElement('strong', null, "312 pads por año por hogar"))
+                    )
+                ),
+                React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-2" }, "3. Demanda Total del Mercado"),
+                     React.createElement('ul', { className: "list-disc list-inside space-y-1 mb-3" },
+                        React.createElement('li', null, "Hogares objetivo: ~700,000"),
+                        React.createElement('li', null, "Pads anuales por hogar: 312"),
+                        React.createElement('li', null, "Demanda total ≈ ", React.createElement('strong', null, "218 millones de pads/año")),
+                        React.createElement('li', null, "Equivalente a ", React.createElement('strong', null, "18.2 millones de pads/mes"))
+                    ),
+                    React.createElement('p', { className: "font-semibold text-primary dark:text-secondary" }, "Capturar solo el 0.5% de cuota de mercado:"),
+                    React.createElement('ul', { className: "list-disc list-inside space-y-1 pl-4" },
+                        React.createElement('li', null, "1.1 millones de pads/año → 91,000 pads/mes"),
+                        React.createElement('li', null, "Eso es aproximadamente ", React.createElement('strong', null, "22,500 paquetes (de 50 pads cada uno)/año"), " → 1,875 paquetes/mes")
+                    )
+                ),
+                React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-2" }, "4. Ingresos Estimados"),
+                    React.createElement('p', { className: "mb-2" }, "Asumiendo precio de venta al público ~US$16 (RD$900) por paquete de 50 pads:"),
+                    React.createElement('ul', { className: "list-disc list-inside space-y-1" },
+                        React.createElement('li', null, "1,875 paquetes/mes × RD$900 ≈ ", React.createElement('strong', null, "RD$1.69M/mes (~US$30,000)")),
+                        React.createElement('li', null, "Ingresos anuales del 1er año ~", React.createElement('strong', null, "RD$20M (~US$360k)"))
+                    ),
+                    React.createElement('p', { className: "mt-2" }, "Con crecimiento al 2% de cuota de mercado → los ingresos podrían crecer cerca de ", React.createElement('strong', null, "RD$80M/año (~US$1.4M)"))
+                ),
+                 React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-3" }, "5. Crecimiento a 2, 5 y 10 Años"),
+                    React.createElement('p', { className: "mb-3 text-sm text-slate-600 dark:text-slate-400"}, "Asumiendo un crecimiento de tenencia de perros del +6–12% anual:"),
+                    React.createElement('div', { className: "overflow-x-auto table-responsive" },
+                        React.createElement('table', { className: "min-w-full bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-700 rounded-md" },
+                            React.createElement('thead', { className: "bg-slate-100 dark:bg-slate-700" },
+                                React.createElement('tr', null,
+                                    growthTableHeaders.map(header => React.createElement('th', { key: header, className: "px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider whitespace-normal" }, header))
+                                )
+                            ),
+                            React.createElement('tbody', { className: "divide-y divide-slate-200 dark:divide-slate-700" },
+                                growthTableData.map((row, rowIndex) => React.createElement('tr', { key: rowIndex },
+                                    row.map((cell, cellIndex) => React.createElement('td', { key: cellIndex, className: "px-4 py-2 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300" }, cell))
+                                ))
+                            )
+                        )
+                    )
+                ),
+                React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-2" }, "6. Consideraciones Clave"),
+                    React.createElement('ul', { className: "space-y-2" },
+                        keyConsiderations.map((item, index) =>
+                            React.createElement('li', { key: index, className: "flex items-start" },
+                                React.createElement(CheckCircleIcon, { className: "w-5 h-5 text-green-500 dark:text-green-400 mr-2 mt-0.5 flex-shrink-0" }),
+                                React.createElement('span', null, item)
+                            )
+                        )
+                    )
+                )
+            )
+        );
+    };
+
+    const FinancialProjectionsCostAnalysisSection = ({ id }) => {
+        const costAnalysisHeaders = ['Concepto', 'Estimación de Costo (USD)', 'Notas'];
+        const costAnalysisData = [
+            ['Máquina (semiautomática, 100 m/min)', '20,000–50,000 FOB China', 'ej., CD150‑FC o RX‑PP‑120'],
+            ['Envío y Aranceles de Importación', '~ $5,000', 'Envío + tasas portuarias + ~15–20% arancel de importación'],
+            ['Nave Industrial', '$500/mes → $6,000/año', 'Según plan anterior'],
+            ['Personal (3 operadores + 1 gerente)', '$9,000/año', 'Asignación para el año inicial'],
+            ['Materias Primas y Consumibles', '$6,000 (suministro para 6 meses)', 'No tejido, SAP, PE, pegamento, empaque'],
+            ['Empaque y Marketing', '$3,000/año', 'Branding, etiquetas, anuncios digitales'],
+            ['Contingencia / Gastos Generales', '$6,000/año', 'Servicios públicos, licencia, costos inesperados'],
+            ['Capex/Opex Total Estimado (Año 1)', '≈ $55,000 - $85,000', 'Incluyendo inicio y colchón (varía según elección de máquina)']
+        ];
+
+        const pricingScenariosHeaders = ['Producto', 'Precio-US$', 'Costo de Producción/paquete', 'Margen Bruto'];
+        const pricingScenariosData = [
+            ['Paquete de 50 pads (consumidor)', '$16', '$6', '~ $10 (62%)'],
+            ['Paquete con base + sprays', '$35', '$18', '~ $17 (49%)'],
+            ['Precio B2B por volumen por paquete', '$12', '$6', '~ $6 (50%)']
+        ];
+        
+        const summaryPoints = [
+            "El mercado está creciendo globalmente a una CAGR de ~7–9%, la economía local de mascotas se expande constantemente.",
+            "La producción local reduce los costos en un 30–40% frente a la importación, permitiendo márgenes competitivos.",
+            "Punto de equilibrio alcanzable dentro del Año 1–2.",
+            "Ingresos proyectados a 5 años ~US$1.5m+; márgenes de ganancia bruta >50%."
+        ];
+
+
+        return React.createElement(SectionWrapper, { id: id, title: "10. Proyecciones Financieras y Análisis de Costos" },
+            React.createElement('div', { className: "space-y-6" },
+                React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-2 flex items-center" }, React.createElement(BeakerIcon, {className: "w-6 h-6 mr-2"}), "1. Mercado Global y Benchmark Local"),
+                    React.createElement('ul', { className: "list-disc list-inside space-y-1" },
+                        React.createElement('li', null, "El mercado global de pads de entrenamiento para cachorros se valoró en US $1.64 mil millones en 2024, proyectado a duplicarse para 2033 con una CAGR de ~9%."),
+                        React.createElement('li', null, "Otras fuentes reportan el mercado global de pads para mascotas en US $1.08 mil millones en 2023, esperando alcanzar ~$2.09 mil millones para 2032 con una CAGR del 7.7%."),
+                        React.createElement('li', null, "Esto muestra un fuerte crecimiento de la demanda—se pueden trazar paralelos con la creciente tendencia de tenencia de mascotas en RD.")
+                    )
+                ),
+                React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-2 flex items-center" }, React.createElement(BeakerIcon, {className: "w-6 h-6 mr-2"}), "2. Contexto del Mercado Local"),
+                    React.createElement('ul', { className: "list-disc list-inside space-y-1" },
+                        React.createElement('li', null, "Mercado de alimentos para mascotas en República Dominicana (2024): US $311 m, creciendo a ~6.5% interanual."),
+                        React.createElement('li', null, "Aunque no hay datos específicos de pads, las categorías de cuidado de mascotas (ej. alimentos, accesorios) están en aumento, reflejando la expansión general del mercado de mascotas.")
+                    )
+                ),
+                React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-3 flex items-center" }, React.createElement(CurrencyDollarIcon, {className: "w-6 h-6 mr-2"}), "3. Análisis de Costos (Producción Local)"),
+                    React.createElement('div', { className: "overflow-x-auto table-responsive" },
+                        React.createElement('table', { className: "min-w-full bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-700 rounded-md" },
+                            React.createElement('thead', { className: "bg-slate-100 dark:bg-slate-700" },
+                                React.createElement('tr', null,
+                                    costAnalysisHeaders.map(header => React.createElement('th', { key: header, className: "px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider" }, header))
+                                )
+                            ),
+                            React.createElement('tbody', { className: "divide-y divide-slate-200 dark:divide-slate-700" },
+                                costAnalysisData.map((row, rowIndex) => React.createElement('tr', { key: rowIndex },
+                                    row.map((cell, cellIndex) => React.createElement('td', { key: cellIndex, className: "px-4 py-2 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300" }, cell))
+                                ))
+                            )
+                        )
+                    )
+                ),
+                React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-3 flex items-center" }, React.createElement(ChartBarIcon, {className: "w-6 h-6 mr-2"}),"4. Pronósticos de Ingresos y Economía Unitaria"),
+                    React.createElement('p', { className: "mb-3" }, "Asumiendo objetivo del primer año: 90,000 pads/mes → paquetes de 50 pads = 1,800 paquetes/mes"),
+                    React.createElement('h4', { className: "text-lg font-semibold text-primary dark:text-secondary mb-2" }, "Escenarios de Precios"),
+                    React.createElement('div', { className: "overflow-x-auto table-responsive mb-4" },
+                        React.createElement('table', { className: "min-w-full bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-700 rounded-md" },
+                            React.createElement('thead', { className: "bg-slate-100 dark:bg-slate-700" },
+                                React.createElement('tr', null,
+                                    pricingScenariosHeaders.map(header => React.createElement('th', { key: header, className: "px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider" }, header))
+                                )
+                            ),
+                            React.createElement('tbody', { className: "divide-y divide-slate-200 dark:divide-slate-700" },
+                                pricingScenariosData.map((row, rowIndex) => React.createElement('tr', { key: rowIndex },
+                                    row.map((cell, cellIndex) => React.createElement('td', { key: cellIndex, className: "px-4 py-2 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300" }, cell))
+                                ))
+                            )
+                        )
+                    ),
+                    React.createElement('h4', { className: "text-lg font-semibold text-primary dark:text-secondary mb-2" }, "Ingresos Mensuales (Año 1)"),
+                    React.createElement('ul', { className: "list-disc list-inside space-y-1 mb-2" },
+                        React.createElement('li', null, "Paquetes D2C: 1,200 paquetes @ $16 = $19,200"),
+                        React.createElement('li', null, "Paquete (300 unidades): 300 @ $35 = $10,500"),
+                        React.createElement('li', null, "Venta mayorista B2B (300 paquetes): 300 @ $12 = $3,600")
+                    ),
+                    React.createElement('p', { className: "font-semibold" }, "Ingresos Mensuales Totales ~ US$33,300 → Anual ~ US$400,000")
+                ),
+                React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-2 flex items-center" }, React.createElement(ChartBarIcon, {className: "w-6 h-6 mr-2"}), "5. Perspectiva de Ingresos a 2 Años"),
+                    React.createElement('ul', { className: "list-disc list-inside space-y-1" },
+                        React.createElement('li', null, "Año 1: Ingresos ~US$400k. Margen de ganancia bruta ~55%. Ganancia antes de impuestos ~US$120k después de deducir Opex."),
+                        React.createElement('li', null, "Año 2: Crecimiento del 50%+ → Ingresos ~US$600k (asumiendo 3,000 paquetes/mes y mayor crecimiento B2B)."),
+                        React.createElement('li', null, "Año 5: Escalando a 6,000 paquetes/mes, expansión a B2B regional → Ingresos ≈US$1.5m, ganancia US$450k+.")
+                    )
+                ),
+                React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-2 flex items-center" }, React.createElement(BeakerIcon, {className: "w-6 h-6 mr-2"}),"6. Análisis de Sensibilidad"),
+                    React.createElement('ul', { className: "list-disc list-inside space-y-1" },
+                        React.createElement('li', null, React.createElement('strong', null, "Escenario A (Conservador): "), "Solo D2C; 1,500 paquetes/mes → Ingresos US$240k; ganancia ~US$50k."),
+                        React.createElement('li', null, React.createElement('strong', null, "Escenario B (Esperado): "), "Mezcla de D2C + paquetes + ventas B2B → Ingresos US$400k; ganancia ~US$120k."),
+                        React.createElement('li', null, React.createElement('strong', null, "Escenario C (Agresivo + escala): "), "Distribución regional; 6,000 paquetes/mes → Ingresos US$1.5m; ganancia US$450k.")
+                    )
+                ),
+                React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow"},
+                    React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-2" }, "7. Resumen para la Presentación a Inversores"),
+                     React.createElement('ul', { className: "space-y-2" },
+                        summaryPoints.map((item, index) =>
+                            React.createElement('li', { key: index, className: "flex items-start" },
+                                React.createElement(CheckCircleIcon, { className: "w-5 h-5 text-green-500 dark:text-green-400 mr-2 mt-0.5 flex-shrink-0" }),
+                                React.createElement('span', null, item)
+                            )
+                        )
+                    )
+                )
+            )
+        );
+    };
+
+    const InvestorOfferSection = ({ id }) => {
+      return React.createElement(SectionWrapper, { id: id, title: "11. Propuesta de Socio" },
+        React.createElement('div', { className: "bg-primary bg-opacity-10 dark:bg-opacity-20 p-6 rounded-lg shadow-inner" },
+          React.createElement('div', { className: "flex items-center text-primary dark:text-secondary mb-4" },
+            React.createElement(GiftIcon, { className: "w-8 h-8 mr-3" }),
+            React.createElement('h3', { className: "text-2xl font-semibold" }, "Nuestra Propuesta")
+          ),
+          React.createElement('ul', { className: "list-disc list-inside space-y-2 text-slate-700 dark:text-slate-300 text-lg" },
+            React.createElement('li', null, React.createElement('strong', null, "Inversión Requerida:"), " USD $50,000"),
+            React.createElement('li', null, React.createElement('strong', null, "Participación Ofrecida:"), " 20% de la empresa"),
+            React.createElement('li', null, React.createElement('strong', null, "Estructura de Retorno:"), " Retorno preferente de la inversión en 36 meses")
+          ),
+          React.createElement('h4', { className: "font-semibold text-slate-800 dark:text-slate-100 mt-6 mb-2 text-xl" }, "Uso de los Fondos:"),
+          React.createElement('p', { className: "text-slate-700 dark:text-slate-300" },
+            "Adquisición de maquinaria, alquiler de nave, nómina, insumos de materia prima, empaque, marketing y fondo de contingencia."
+          )
+        )
+      );
+    };
+    
+    
+    
+    
+   const CallToActionSection = ({ id }) => {
+  return React.createElement('section', { id: id, className: "my-3 scroll-mt-0" },
+    React.createElement('img', { 
+      src: "https://bucket.mlcdn.com/a/3336/3336910/images/57c101cb510b280ca6d8a07aa67db9d995b773e6.png",
+      alt: "Suplipad Journey Banner",
+      className: "w-full max-w-5xl mx-auto rounded-lg mb-8 aspect-video object-cover" 
+    }),
+    React.createElement('div', { className: "bg-primary text-white text-center p-8 sm:p-12 rounded-lg shadow-xl" },
+      React.createElement('h2', { className: "text-3xl sm:text-4xl font-bold mb-6" }, "¡Únete al Viaje de Suplipad.shop!"),
+      React.createElement('p', { className: "text-lg sm:text-xl mb-8 leading-relaxed max-w-2xl mx-auto" },
+        "Conviértete en socio de una marca que no solo busca generar ganancias, sino también impactar positivamente la vida de miles de mascotas y dueños dominicanos."
+      ),
+      React.createElement('p', { className: "text-2xl sm:text-3xl font-semibold mb-8" }, "¿Te sumas?"),
+      React.createElement('a', {
+          href: "https://tidycal.com/bebelldigitalsolutions/googlemeet-m8egz9q",
+          className: "bg-secondary hover:bg-opacity-80 transition-colors border-none py-3 px-8 text-lg font-semibold text-white rounded-md cursor-pointer shadow-md hover:shadow-lg transform hover:scale-105"
+        },
+        "¡Hablemos!"
+      )
+    )
+  );
+};  
+
+
+
+    const MainContent = () => {
+      return React.createElement('main', { className: "container mx-auto max-w-5xl p-4 sm:p-6 lg:p-8" },
+        React.createElement(HeroSection, { id: "hero" }),
+        React.createElement(TargetAudienceSection, { id: "target-audience" }),
+        React.createElement(ExecutiveSummarySection, { id: "executive-summary" }),
+        React.createElement(MarketStudySection, { id: "market-study" }),
+        React.createElement(SwotAnalysisSection, { id: "swot-analysis" }),
+        React.createElement(InvestmentProposalSection, { id: "investment-proposal" }),
+        React.createElement(IncomeProjectionsSection, { id: "income-projections" }),
+        React.createElement(CompetitiveAdvantagesSection, { id: "competitive-advantages" }),
+        React.createElement(MachineryOptionsSection, {id: "machinery-options" }),
+        React.createElement(SalesProjectionsSection, {id: "sales-projections" }), 
+        React.createElement(FinancialProjectionsCostAnalysisSection, {id: "financial-projections-cost-analysis" }), 
+        React.createElement(InvestorOfferSection, { id: "investor-offer" }),
+        React.createElement(CallToActionSection, { id: "Conclusion" })
+      );
+    };
+
+    const App = () => {
+      const [theme, setTheme] = useState(() => {
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) return storedTheme;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      });
+
+      useEffect(() => {
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        localStorage.setItem('theme', theme);
+        
+        // Actualizar idioma del html tag
+        document.documentElement.lang = "es";
+      }, [theme]);
+
+      const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+      };
+      
+      const navLinks = [
+        { id: 'hero', title: '1. Introducción' },
+        { id: 'target-audience', title: '2. Público Objetivo' },
+        { id: 'executive-summary', title: '3. Resumen Ejecutivo' },
+        { id: 'market-study', title: '4. Estudio de Mercado' },
+        { id: 'swot-analysis', title: '5. Análisis FODA' },
+        { id: 'investment-proposal', title: '6. Propuesta de Inversión' },
+        { id: 'income-projections', title: '7. Proyecciones de Ingresos' },
+        { id: 'competitive-advantages', title: '8. Ventajas Competitivas' },
+        { id: 'machinery-options', title: '9. Opciones de Maquinaria' },
+        { id: 'sales-projections', title: '10. Proyecciones de Ventas (RD)' }, 
+        { id: 'financial-projections-cost-analysis', title: '11. Finanzas y Costos' }, 
+        { id: 'investor-offer', title: '12. Propuesta de Socio' }, 
+        { id: 'Conclusion', title: '13. Conclusión' }, 
+      ];
+
+      const scrollToSection = (sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const detailsParent = element.closest('details');
+          if (detailsParent && !detailsParent.open) {
+            detailsParent.open = true;
+          }
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }, detailsParent && !detailsParent.open ? 100 : 0);
+        }
+      };
+
+      return React.createElement(ThemeContext.Provider, { value: { theme, toggleTheme } },
+        React.createElement('div', { className: "flex font-sans" }, 
+          React.createElement(Sidebar, { navLinks: navLinks, onNavigate: scrollToSection }),
+          React.createElement('div', { className: "ml-[250px] w-[calc(100%-250px)]" },
+            React.createElement(MainContent, null)
+          )
+        )
+      );
+    };
+    // --- END OF COMPONENTS ---
+
+    const rootElement = document.getElementById('root');
+    if (!rootElement) {
+      throw new Error("Could not find root element to mount to");
+    }
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(React.createElement(React.StrictMode, null, React.createElement(App, null)));
+
+  </script>
+  
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const backToTop = document.createElement("div");
+    backToTop.id = "back-to-top";
+    backToTop.style.position = "fixed";
+    backToTop.style.bottom = "20px";
+    backToTop.style.right = "20px";
+    backToTop.style.display = "none";
+    backToTop.style.cursor = "pointer";
+    backToTop.style.zIndex = "9999";
+    const backToTopImg = document.createElement("img");
+    backToTopImg.src = "https://bucket.mlcdn.com/a/3336/3336910/images/29840e122b950f88fdca23072015101b427a9112.png";
+    backToTopImg.alt = "Volver arriba";
+    backToTopImg.style.width = "40px";
+    backToTopImg.style.height = "40px";
+    backToTop.appendChild(backToTopImg);
+    document.body.appendChild(backToTop);
+    window.addEventListener("scroll", function () {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            backToTop.style.display = "block";
+        } else {
+            backToTop.style.display = "none";
+        }
+    });
+    backToTop.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+});
+</script>
+  
+</body>
+</html>
