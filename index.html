@@ -645,87 +645,114 @@
       );
     };
 
-    const MachineryOptionsSection = ({ id }) => {
-      const machineOptionsData = [
-          { id: 'rx-pp-120', name: 'Semi-automatic Line RX-PP-120', supplier: 'Quanzhou Ruoxin Machinery', type: 'Semi-automatic Line', speed: 'Up to 100 m/min (~5 pads/sec)', production: '≥ 85% efficiency, ≥ 97% acceptable products', sizes: 'Up to 900 × 600 mm (customizable)', specifications: '80 kW nominal power, compressor 3000-4000 NL/min, 30-35 tons', price: '~USD 50,000 /set FOB China', advantages: ['Affordable price', 'Good efficiency'], disadvantages: ['Not fully automatic', 'Requires trained personnel'], idealFor: 'Initial/moderate local production.'},
-          { id: 'cd150-fc', name: 'Semi-automatic Machine CD150-FC', supplier: 'Fujian Yichuan Automation', type: 'Semi-automatic Machine', speed: 'Not specified, designed for stability', price: 'USD 20,000–30,000 FOB China', advantages: ['Very cost-effective', 'Adequate technology for local production'], disadvantages: ['Lower speed', 'More basic technology'], idealFor: 'Market testing, minimal investment, small start or pilot.' },
-          { id: 'yc-cd200-sv', name: 'Automatic Line YC-CD200-SV', supplier: 'Fujian Yichuan Automation', type: 'Automatic Line', price: 'USD 307,700–615,000 FOB China', power: '230 kW', dimensions: '30 m × 7 m × 5 m, 45 tons', speed: '>400 pcs/min (~7 pads/sec)', certifications: 'CE, ISO9001, SGS', advantages: ['High productivity', 'Fully automatic', 'Ideal for large scale and B2B clients'], disadvantages: ['Significant upfront investment'], idealFor: 'Large-scale production, export.'},
-      ];
-      const quickComparisonHeaders = ['Machine', 'Level', 'Speed', 'Price (FOB)', 'Ideal for...'];
-      const quickComparisonData = [
-          ['RX-PP-120', 'Semi-automatic', '100 m/min', 'USD 50k', 'Initial/moderate local production'],
-          ['CD150-FC', 'Basic', 'Stable', 'USD 20-30k', 'Market testing, minimal investment'],
-          ['YC-CD200-SV', 'Fully Automatic', '>400 pads/min', 'USD 308-615k', 'Large-scale production, export']
-      ];
 
-      const MachineCard = ({ machine }) => {
-        let IconComponent;
-        if (machine.type.toLowerCase().includes('automatic')) IconComponent = RocketLaunchIcon;
-        else if (machine.name.includes('RX-PP-120')) IconComponent = WrenchScrewdriverIcon;
-        else IconComponent = PuzzlePieceIcon;
 
-        return React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow" },
-          React.createElement('div', { className: "flex items-center mb-3" },
-            React.createElement(IconComponent, { className: "w-8 h-8 text-primary dark:text-secondary mr-3 flex-shrink-0" }),
-            React.createElement('h4', { className: "text-xl font-semibold text-primary dark:text-secondary" }, machine.name)
-          ),
-          React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 mb-1" }, React.createElement('strong', null, "Supplier: "), machine.supplier),
-          React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 mb-1" }, React.createElement('strong', null, "Type: "), machine.type),
-          React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 mb-3" }, React.createElement('strong', null, "Price: "), machine.price),
-          machine.speed && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Speed: "), machine.speed),
-          machine.production && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Production: "), machine.production),
-          machine.sizes && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Sizes: "), machine.sizes),
-          machine.specifications && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Specs: "), machine.specifications),
-          machine.power && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Power: "), machine.power),
-          machine.dimensions && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Dimensions/Weight: "), machine.dimensions),
-          machine.certifications && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Certifications: "), machine.certifications),
-          React.createElement('div', { className: "mt-3" },
-            React.createElement('strong', { className: "text-sm text-slate-700 dark:text-slate-200" }, "Advantages:"),
-            React.createElement('ul', { className: "list-disc list-inside text-xs text-slate-600 dark:text-slate-400 pl-4" },
-              machine.advantages.map(adv => React.createElement('li', { key: adv }, adv))
-            )
-          ),
-          React.createElement('div', { className: "mt-2" },
-            React.createElement('strong', { className: "text-sm text-slate-700 dark:text-slate-200" }, "Disadvantages:"),
-            React.createElement('ul', { className: "list-disc list-inside text-xs text-slate-600 dark:text-slate-400 pl-4" },
-              machine.disadvantages.map(dis => React.createElement('li', { key: dis }, dis))
-            )
-          ),
-          React.createElement('p', { className: "text-sm mt-3 font-semibold text-slate-700 dark:text-slate-200" }, React.createElement('strong', null, "Ideal for: "), machine.idealFor)
-        );
-      };
+const MachineryOptionsSection = ({ id }) => {
+  // Video URL - replace with your actual video URL
+  const videoUrl = "https://cdn.shopify.com/videos/c/o/v/8c94f53848b84794a8d3dfea24df7e86.mp4";
+  
+  const machineOptionsData = [
+    { id: 'rx-pp-120', name: 'Semi-automatic Line RX-PP-120', supplier: 'Quanzhou Ruoxin Machinery', type: 'Semi-automatic Line', speed: 'Up to 100 m/min (~5 pads/sec)', production: '≥ 85% efficiency, ≥ 97% acceptable products', sizes: 'Up to 900 × 600 mm (customizable)', specifications: '80 kW nominal power, compressor 3000-4000 NL/min, 30-35 tons', price: '~USD 50,000 /set FOB China', advantages: ['Affordable price', 'Good efficiency'], disadvantages: ['Not fully automatic', 'Requires trained personnel'], idealFor: 'Initial/moderate local production.'},
+    { id: 'cd150-fc', name: 'Semi-automatic Machine CD150-FC', supplier: 'Fujian Yichuan Automation', type: 'Semi-automatic Machine', speed: 'Not specified, designed for stability', price: 'USD 20,000–30,000 FOB China', advantages: ['Very cost-effective', 'Adequate technology for local production'], disadvantages: ['Lower speed', 'More basic technology'], idealFor: 'Market testing, minimal investment, small start or pilot.' },
+    { id: 'yc-cd200-sv', name: 'Automatic Line YC-CD200-SV', supplier: 'Fujian Yichuan Automation', type: 'Automatic Line', price: 'USD 307,700–615,000 FOB China', power: '230 kW', dimensions: '30 m × 7 m × 5 m, 45 tons', speed: '>400 pcs/min (~7 pads/sec)', certifications: 'CE, ISO9001, SGS', advantages: ['High productivity', 'Fully automatic', 'Ideal for large scale and B2B clients'], disadvantages: ['Significant upfront investment'], idealFor: 'Large-scale production, export.'},
+  ];
+  
+  const quickComparisonHeaders = ['Machine', 'Level', 'Speed', 'Price (FOB)', 'Ideal for...'];
+  const quickComparisonData = [
+    ['RX-PP-120', 'Semi-automatic', '100 m/min', 'USD 50k', 'Initial/moderate local production'],
+    ['CD150-FC', 'Basic', 'Stable', 'USD 20-30k', 'Market testing, minimal investment'],
+    ['YC-CD200-SV', 'Fully Automatic', '>400 pads/min', 'USD 308-615k', 'Large-scale production, export']
+  ];
 
-      return React.createElement(SectionWrapper, { id: id, title: "8. Machinery Options for Production" },
-        React.createElement('div', { className: "grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8" },
-          machineOptionsData.map(machine => React.createElement(MachineCard, { key: machine.id, machine: machine }))
-        ),
-        React.createElement('h3', { className: "text-2xl font-semibold text-primary dark:text-secondary mb-3 mt-8" }, "Quick Comparison"),
-        React.createElement('div', { className: "overflow-x-auto table-responsive mb-8" },
-          React.createElement('table', { className: "min-w-full bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-700 rounded-md" },
-            React.createElement('thead', { className: "bg-slate-100 dark:bg-slate-700" },
-              React.createElement('tr', null,
-                quickComparisonHeaders.map(header => React.createElement('th', { key: header, className: "px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider" }, header))
-              )
-            ),
-            React.createElement('tbody', { className: "divide-y divide-slate-200 dark:divide-slate-700" },
-              quickComparisonData.map((row, rowIndex) => React.createElement('tr', { key: rowIndex },
-                row.map((cell, cellIndex) => React.createElement('td', { key: cellIndex, className: "px-4 py-2 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300" }, cell))
-              ))
-            )
+  const MachineCard = ({ machine }) => {
+    let IconComponent;
+    if (machine.type.toLowerCase().includes('automatic')) IconComponent = RocketLaunchIcon;
+    else if (machine.name.includes('RX-PP-120')) IconComponent = WrenchScrewdriverIcon;
+    else IconComponent = PuzzlePieceIcon;
+
+    return React.createElement('div', { className: "bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow" },
+      React.createElement('div', { className: "flex items-center mb-3" },
+        React.createElement(IconComponent, { className: "w-8 h-8 text-primary dark:text-secondary mr-3 flex-shrink-0" }),
+        React.createElement('h4', { className: "text-xl font-semibold text-primary dark:text-secondary" }, machine.name)
+      ),
+      React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 mb-1" }, React.createElement('strong', null, "Supplier: "), machine.supplier),
+      React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 mb-1" }, React.createElement('strong', null, "Type: "), machine.type),
+      React.createElement('p', { className: "text-sm text-slate-600 dark:text-slate-400 mb-3" }, React.createElement('strong', null, "Price: "), machine.price),
+      machine.speed && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Speed: "), machine.speed),
+      machine.production && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Production: "), machine.production),
+      machine.sizes && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Sizes: "), machine.sizes),
+      machine.specifications && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Specs: "), machine.specifications),
+      machine.power && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Power: "), machine.power),
+      machine.dimensions && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Dimensions/Weight: "), machine.dimensions),
+      machine.certifications && React.createElement('p', { className: "text-xs text-slate-500 dark:text-slate-400" }, React.createElement('strong', null, "Certifications: "), machine.certifications),
+      React.createElement('div', { className: "mt-3" },
+        React.createElement('strong', { className: "text-sm text-slate-700 dark:text-slate-200" }, "Advantages:"),
+        React.createElement('ul', { className: "list-disc list-inside text-xs text-slate-600 dark:text-slate-400 pl-4" },
+          machine.advantages.map(adv => React.createElement('li', { key: adv }, adv))
+        )
+      ),
+      React.createElement('div', { className: "mt-2" },
+        React.createElement('strong', { className: "text-sm text-slate-700 dark:text-slate-200" }, "Disadvantages:"),
+        React.createElement('ul', { className: "list-disc list-inside text-xs text-slate-600 dark:text-slate-400 pl-4" },
+          machine.disadvantages.map(dis => React.createElement('li', { key: dis }, dis))
+        )
+      ),
+      React.createElement('p', { className: "text-sm mt-3 font-semibold text-slate-700 dark:text-slate-200" }, React.createElement('strong', null, "Ideal for: "), machine.idealFor)
+    );
+  };
+
+  return React.createElement(SectionWrapper, { id: id, title: "8. Machinery Options for Production" },
+    // Add video section here
+    React.createElement('div', { className: "mb-8 rounded-lg overflow-hidden" },
+      React.createElement('video', { 
+        className: "w-full rounded-lg shadow-md",
+        controls: true,
+        autoPlay: false,
+        muted: true,
+        playsInline: true
+      },
+        React.createElement('source', { src: videoUrl, type: "video/mp4" }),
+        "Your browser does not support the video tag."
+      )
+    ),
+    
+    React.createElement('div', { className: "grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8" },
+      machineOptionsData.map(machine => React.createElement(MachineCard, { key: machine.id, machine: machine }))
+    ),
+    React.createElement('h3', { className: "text-2xl font-semibold text-primary dark:text-secondary mb-3 mt-8" }, "Quick Comparison"),
+    React.createElement('div', { className: "overflow-x-auto table-responsive mb-8" },
+      React.createElement('table', { className: "min-w-full bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-700 rounded-md" },
+        React.createElement('thead', { className: "bg-slate-100 dark:bg-slate-700" },
+          React.createElement('tr', null,
+            quickComparisonHeaders.map(header => React.createElement('th', { key: header, className: "px-4 py-2 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider" }, header))
           )
         ),
-        React.createElement('h3', { className: "text-2xl font-semibold text-primary dark:text-secondary mb-3 mt-8" }, "Recommendation"),
-        React.createElement('div', { className: "space-y-2 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow" },
-            React.createElement('p', null, "If you aim to start local production with good efficiency without a huge investment, the ", React.createElement('strong', null, "RX-PP-120 (~USD 50K)"), " is the most balanced option."),
-            React.createElement('p', null, "For minimal investment and to validate demand, the ", React.createElement('strong', null, "CD150-FC (~USD 20-30K)"), " offers an entry point."),
-            React.createElement('p', null, "If your goal is to scale and supply the entire island and international distributors, the ", React.createElement('strong', null, "YC-CD200-SV (~USD 308K+)"), " is the efficient long-term option.")
-        ),
-        React.createElement('div', { className: "mt-8 p-4 bg-yellow-50 dark:bg-yellow-700 dark:bg-opacity-30 border-l-4 border-yellow-400 dark:border-yellow-500 text-yellow-700 dark:text-yellow-200 rounded" },
-            React.createElement('p', {className: "font-semibold"}, "Further Information:"),
-            React.createElement('p', null, "Complete technical sheets, supplier contact details, maritime shipping options, and estimates for tariffs and transportation to the Dominican Republic can be provided upon request or further due diligence.")
+        React.createElement('tbody', { className: "divide-y divide-slate-200 dark:divide-slate-700" },
+          quickComparisonData.map((row, rowIndex) => React.createElement('tr', { key: rowIndex },
+            row.map((cell, cellIndex) => React.createElement('td', { key: cellIndex, className: "px-4 py-2 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300" }, cell))
+          ))
         )
-      );
-    };
+      )
+    ),
+    React.createElement('h3', { className: "text-2xl font-semibold text-primary dark:text-secondary mb-3 mt-8" }, "Recommendation"),
+    React.createElement('div', { className: "space-y-2 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-700 p-4 rounded-lg shadow" },
+        React.createElement('p', null, "If you aim to start local production with good efficiency without a huge investment, the ", React.createElement('strong', null, "RX-PP-120 (~USD 50K)"), " is the most balanced option."),
+        React.createElement('p', null, "For minimal investment and to validate demand, the ", React.createElement('strong', null, "CD150-FC (~USD 20-30K)"), " offers an entry point."),
+        React.createElement('p', null, "If your goal is to scale and supply the entire island and international distributors, the ", React.createElement('strong', null, "YC-CD200-SV (~USD 308K+)"), " is the efficient long-term option.")
+    ),
+    React.createElement('div', { className: "mt-8 p-4 bg-yellow-50 dark:bg-yellow-700 dark:bg-opacity-30 border-l-4 border-yellow-400 dark:border-yellow-500 text-yellow-700 dark:text-yellow-200 rounded" },
+        React.createElement('p', {className: "font-semibold"}, "Further Information:"),
+        React.createElement('p', null, "Complete technical sheets, supplier contact details, maritime shipping options, and estimates for tariffs and transportation to the Dominican Republic can be provided upon request or further due diligence.")
+    )
+  );
+};
+    
+    
+    
+    
+    
+    
+    
     
     const SalesProjectionsSection = ({ id }) => {
         const growthTableHeaders = ['Year', 'Dog Household %', 'Dog Homes', 'Pads/year (million)', 'Packs/year', 'Revenue/year (US$)'];
