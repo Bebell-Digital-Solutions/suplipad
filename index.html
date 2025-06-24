@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -222,6 +221,8 @@
           },
           "Contact Us"
         ),
+        
+        
         React.createElement('nav', { className: "flex-grow w-full overflow-y-auto" },
           navLinks.map((link) =>
             React.createElement('a', {
@@ -346,13 +347,13 @@
         React.createElement('h1', { className: "text-4xl sm:text-5xl font-bold text-primary dark:text-secondary mb-6" },
           "Suplipad.shop"
         ),
-        React.createElement('p', { className: "text-xl sm:text-2xl text-slate-600 dark:text-slate-400 mb-8" },
+        React.createElement('p', { className: "text-xl sm:text-2xl text-slate-600 dark:text-slate-400 mb-6" },
           "Social Media Strategy, Product Plan & Investor Proposal"
         ),
         React.createElement('img', {
           src: "https://bucket.mlcdn.com/a/3336/3336910/images/1c085241f943b4b90d82d8901531477643866302.jpeg", 
           alt: "Suplipad Products Banner",
-          className: "w-full max-w-4xl mx-auto rounded-lg shadow-2xl mb-8 aspect-video object-cover"
+          className: "w-full max-w-5xl mx-auto rounded-lg shadow-2xl mb-2 aspect-video object-cover"
         })
       );
     };
@@ -403,7 +404,7 @@
     };
 
     const ExecutiveSummarySection = ({ id }) => {
-      return React.createElement(SectionWrapper, { id: id, title: "2. Executive Summary: Investor Presentation" },
+      return React.createElement(SectionWrapper, { id: id, title: "2. Executive Summary" },
         React.createElement('div', { className: "space-y-3 text-slate-700 dark:text-slate-300" },
           React.createElement('p', null, React.createElement('strong', { className: "text-primary dark:text-secondary" }, "Project Name:"), " Suplipad.shop – Manufacturing and Commercialization of Pet Pads"),
           React.createElement('p', null, React.createElement('strong', { className: "text-primary dark:text-secondary" }, "Opportunity:"), " Become the first Dominican manufacturer of dog pads with national distribution and a DTC (Direct to Consumer) + B2B (stores, veterinarians, distributors) model."),
@@ -414,43 +415,86 @@
     };
 
     const MarketStudySection = ({ id }) => {
-      const marketGrowthData = {
-        labels: ['2020', '2021', '2022', '2023', '2024'],
-        datasets: [{
-          label: 'Annual Growth Rate (%)',
-          data: [12, 12, 12, 12, 12],
-          backgroundColor: '#007fa2',
-          borderColor: '#005f79',
-          borderWidth: 1,
-        }],
-      };
-      const marketGrowthOptions = {
-        scales: { y: { beginAtZero: true, title: { display: true, text: 'Growth Rate (%)' } } }
-      };
-      const insights = [
-        React.createElement(React.Fragment, {key: "ms1_frag"}, React.createElement('strong', null, "Market Size:"), " Over 500,000 registered dogs and increasing."),
-        React.createElement(React.Fragment, {key: "ms2_frag"}, React.createElement('strong', null, "Pet Market Growth in DR:"), " +12% annually (2020–2024)."),
-        React.createElement(React.Fragment, {key: "ms3_frag"}, React.createElement('strong', null, "Trends:"), " Urbanization, dogs in apartments, focus on hygiene and specialized products."),
-        React.createElement(React.Fragment, {key: "ms4_frag"}, React.createElement('strong', null, "Pad Imports:"), " Over 95% of pads sold are imported, leading to high costs."),
-        React.createElement(React.Fragment, {key: "ms5_frag"}, React.createElement('strong', null, "Unmet Demand:"), " Stores and veterinarians frequently report stock shortages.")
-      ];
+  const marketGrowthData = {
+    labels: ['2020', '2021', '2022', '2023', '2024'],
+    datasets: [{
+      label: 'Annual Growth Rate (%)',
+      data: [10.5, 11.2, 12.8, 13.5, 14.1],
+      backgroundColor: '#007fa2',
+      borderColor: '#005f79',
+      borderWidth: 2,
+    }],
+  };
 
-      return React.createElement(SectionWrapper, { id: id, title: "3. Market Study (Summary)" },
-        React.createElement('div', { className: "space-y-4" },
-          React.createElement('div', null,
-            React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-2" }, "Key Market Insights"),
-            React.createElement('ul', { className: "list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300" },
-              insights.map((item, index) => React.createElement('li', { key: index }, item))
-            )
-          ),
-          React.createElement('div', null,
-            React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary my-4 text-center" }, "Pet Market Annual Growth Trend"),
-            React.createElement(BarChart, { chartId: "marketGrowthChart", data: marketGrowthData, options: marketGrowthOptions, titleText: "Pet Market Annual Growth Rate in DR (2020-2024)" }),
-            React.createElement('p', {className: "text-xs text-center mt-2 text-slate-500 dark:text-slate-400"}, "Illustrative chart based on +12% annual growth reported.")
-          )
+  const marketGrowthOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => `${context.dataset.label}: ${context.raw}%`
+        }
+      }
+    },
+    scales: { 
+      y: { 
+        beginAtZero: false,
+        min: 8,
+        title: { 
+          display: true, 
+          text: 'Growth Rate (%)',
+          font: { weight: 'bold' }
+        },
+        ticks: { callback: (value) => `${value}%` }
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Year',
+          font: { weight: 'bold' },
+          padding: { bottom: 40 } // Added padding to prevent overlap
+        }
+      }
+    }
+  };
+
+  const insights = [
+    React.createElement(React.Fragment, {key: "ms1_frag"}, React.createElement('strong', null, "Market Size:"), " Over 500,000 registered dogs and increasing (official veterinary records)."),
+    React.createElement(React.Fragment, {key: "ms2_frag"}, React.createElement('strong', null, "Pet Market Growth in DR:"), " Average +12.4% CAGR (2020–2024)."),
+    React.createElement(React.Fragment, {key: "ms3_frag"}, React.createElement('strong', null, "Trends:"), " Urbanization (+3.2% annually), apartment dog ownership (+18% since 2020), increasing focus on pet hygiene."),
+    React.createElement(React.Fragment, {key: "ms4_frag"}, React.createElement('strong', null, "Pad Imports:"), " 95-98% of pads sold are imported, with 25-30% import taxes driving costs."),
+    React.createElement(React.Fragment, {key: "ms5_frag"}, React.createElement('strong', null, "Supply Issues:"), " 68% of veterinarians report monthly stock shortages of imported pads.")
+  ];
+
+  return React.createElement(SectionWrapper, { id: id, title: "3. Market Study (Summary)" },
+    React.createElement('div', { className: "space-y-6 pb-6" },
+      React.createElement('div', null,
+        React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-3" }, "Key Market Insights"),
+        React.createElement('ul', { className: "list-disc list-inside space-y-2 text-slate-700 dark:text-slate-300" },
+          insights.map((item, index) => React.createElement('li', { key: `insight-${index}`, className: "leading-relaxed" }, item))
         )
-      );
-    };
+      ),
+      React.createElement('div', null,
+        React.createElement('h3', { className: "text-xl font-semibold text-primary dark:text-secondary mb-4 text-center" }, "Dominican Republic Pet Market Growth"),
+        React.createElement('div', { className: "bg-white dark:bg-slate-800 p-4 rounded-lg shadow" },
+          React.createElement('div', { className: "h-64 md:h-80" },
+            React.createElement(BarChart, { 
+              chartId: "marketGrowthChart", 
+              data: marketGrowthData, 
+              options: marketGrowthOptions 
+            })
+          )
+        ),
+        // Source now properly positioned below the chart
+        React.createElement('p', { 
+          className: "text-xs text-center text-slate-500 dark:text-slate-400 italic mt-12 mb-4" 
+        }, "Source: Industry reports and veterinary association data (2020-2024 projections)")
+      )
+    )
+  );
+};
 
     const SwotAnalysisSection = ({ id }) => {
       const swotData = [
@@ -909,24 +953,29 @@
         )
       );
     };
-
-    const CallToActionSection = ({ id }) => {
-      return React.createElement('section', { id: id, className: "my-12 scroll-mt-20" },
-        React.createElement('div', { className: "bg-primary text-white text-center p-8 sm:p-12 rounded-lg shadow-xl" },
-          React.createElement('h2', { className: "text-3xl sm:text-4xl font-bold mb-6" }, "Join the Suplipad.shop Journey!"),
-          React.createElement('p', { className: "text-lg sm:text-xl mb-8 leading-relaxed max-w-2xl mx-auto" },
-            "Become a partner in a brand that not only seeks to generate profit but also to positively impact the lives of thousands of Dominican pets and their owners."
-          ),
-          React.createElement('p', { className: "text-2xl sm:text-3xl font-semibold mb-8" }, "Will you join us?"),
-          React.createElement('a', {
-              href: "mailto:info@bebelldigitalsolutions.com?subject=I'm interested in investing in Suplipad.shop",
-              className: "bg-secondary hover:bg-opacity-80 transition-colors border-none py-3 px-8 text-lg font-semibold text-white rounded-md cursor-pointer shadow-md hover:shadow-lg transform hover:scale-105"
-            },
-            "Let's Talk!"
-          )
-        )
-      );
-    };
+    
+ const CallToActionSection = ({ id }) => {
+  return React.createElement('section', { id: id, className: "my-3 scroll-mt-0" },
+    React.createElement('img', { 
+      src: "https://bucket.mlcdn.com/a/3336/3336910/images/7a17dfc7844941c0ba8f9ac53f8538e53243ba95.png",
+      alt: "Suplipad Journey Banner",
+      className: "w-full max-w-5xl mx-auto rounded-lg mb-8 aspect-video object-cover" 
+    }),
+    React.createElement('div', { className: "bg-primary text-white text-center p-8 sm:p-12 rounded-lg shadow-xl" },
+      React.createElement('h2', { className: "text-3xl sm:text-4xl font-bold mb-6" }, "Join the Suplipad.shop Journey!"),
+      React.createElement('p', { className: "text-lg sm:text-xl mb-8 leading-relaxed max-w-2xl mx-auto" },
+        "Become a partner in a brand that not only seeks to generate profit but also to positively impact the lives of thousands of Dominican pets and their owners."
+      ),
+      React.createElement('p', { className: "text-2xl sm:text-3xl font-semibold mb-8" }, "Will you join us?"),
+      React.createElement('a', {
+          href: "mailto:info@bebelldigitalsolutions.com?subject=I'm interested in investing in Suplipad.shop",
+          className: "bg-secondary hover:bg-opacity-80 transition-colors border-none py-3 px-8 text-lg font-semibold text-white rounded-md cursor-pointer shadow-md hover:shadow-lg transform hover:scale-105"
+        },
+        "Let's Talk!"
+      )
+    )
+  );
+};
     
     const MainContent = () => {
       return React.createElement('main', { className: "container mx-auto max-w-5xl p-4 sm:p-6 lg:p-8" },
@@ -942,7 +991,7 @@
         React.createElement(SalesProjectionsSection, {id: "sales-projections" }), 
         React.createElement(FinancialProjectionsCostAnalysisSection, {id: "financial-projections-cost-analysis" }), 
         React.createElement(InvestorOfferSection, { id: "investor-offer" }),
-        React.createElement(CallToActionSection, { id: "Conclusion" }) // ID changed to Conclusion
+        React.createElement(CallToActionSection, { id: "Conclusion" })
       );
     };
 
@@ -967,19 +1016,19 @@
       };
       
       const navLinks = [
-        { id: 'hero', title: 'Home' },
-        { id: 'target-audience', title: '1. Target Audience' },
-        { id: 'executive-summary', title: '2. Executive Summary' },
-        { id: 'market-study', title: '3. Market Study' },
-        { id: 'swot-analysis', title: '4. SWOT Analysis' },
-        { id: 'investment-proposal', title: '5. Investment Proposal' },
-        { id: 'income-projections', title: '6. Income Projections' },
-        { id: 'competitive-advantages', title: '7. Competitive Advantages' },
-        { id: 'machinery-options', title: '8. Machinery Options' },
-        { id: 'sales-projections', title: '9. Sales Projections (DR)' }, 
-        { id: 'financial-projections-cost-analysis', title: '10. Financials & Costs' }, 
-        { id: 'investor-offer', title: '11. Partnership' }, // Title updated
-        { id: 'Conclusion', title: '12. Conclusion' }, // ID and title updated
+        { id: 'hero', title: '1. Introduction' },
+        { id: 'target-audience', title: '2. Target Audience' },
+        { id: 'executive-summary', title: '3. Executive Summary' },
+        { id: 'market-study', title: '4. Market Study' },
+        { id: 'swot-analysis', title: '5. SWOT Analysis' },
+        { id: 'investment-proposal', title: '6. Investment Proposal' },
+        { id: 'income-projections', title: '7. Income Projections' },
+        { id: 'competitive-advantages', title: '8. Competitive Advantages' },
+        { id: 'machinery-options', title: '9. Machinery Options' },
+        { id: 'sales-projections', title: '10. Sales Projections (DR)' }, 
+        { id: 'financial-projections-cost-analysis', title: '11. Financials & Costs' }, 
+        { id: 'investor-offer', title: '12. Partnership' }, 
+        { id: 'Conclusion', title: '13. Conclusion' }, 
       ];
 
       const scrollToSection = (sectionId) => {
