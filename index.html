@@ -66,6 +66,25 @@
             -webkit-overflow-scrolling: touch;
         }
     }
+
+
+
+    .custom-image-widget {
+  position: fixed !important;
+  top: 80px !important;  /* Verify this value isn't too large */
+  margin: 0 !important;
+  padding: 0 !important;
+right: 0px;
+        z-index: 999;
+}
+  
+    .custom-image {
+        width: 70px;
+        height: auto;
+    }
+
+
+   
   </style>
 <script type="importmap">
 {
@@ -79,6 +98,17 @@
 </head>
 <body class="bg-lightbg dark:bg-darkbg text-slate-800 dark:text-darktext">
   <div id="root"></div>
+
+ 
+ <!-- TRANSLATE BUTTON -->
+ <div class="custom-image-widget">
+    <a href="https://bebell-digital-solutions.github.io/suplipad/espanol">
+        <img class="custom-image" src="https://bucket.mlcdn.com/a/3336/3336910/images/138f14304ea21715dfae64ae5fe1d71b08c2d451.png" alt="Spanish Translation">
+    </a>
+</div>
+<!-- TRANSLATE BUTTON --> 
+
+  
 
   <script type="module">
     import React from 'react';
@@ -489,7 +519,7 @@
         ),
         // Source now properly positioned below the chart
         React.createElement('p', { 
-          className: "text-xs text-center text-slate-500 dark:text-slate-400 italic mt-12 mb-4" 
+          className: "text-xs text-center text-slate-500 dark:text-slate-400 italic pt-6 mt-12 mb-4" 
         }, "Source: Industry reports and veterinary association data (2020-2024 projections)")
       )
     )
